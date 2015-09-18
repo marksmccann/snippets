@@ -1,0 +1,13 @@
+/**
+ * Base Styles
+ * @author: Mark McCann (http://www.markmccann.me)
+ * @license: none, public domain
+ */
+
+body {
+  font-family: 'Arial';
+  font-size: 0.85rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: #fff;
+}
