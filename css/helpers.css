@@ -1,0 +1,25 @@
+/*
+ * Helper Classes v1.0.0
+ * Author: Mark McCann
+ * License: None (Public Domain)
+ */
+
+.clearfix:before, .clearfix:after {
+    content: " ";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+/* IE 6/7 only */
+.clearfix {
+    *zoom: 1;
+}
+
+.left { float: left; }
+.right { float: right; }
+.relative { position: relative; }
+.hidden { display: none; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-center { text-align: center; }
