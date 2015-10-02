@@ -93,6 +93,33 @@ var removeAttr = function ( target, attr ) {
  * @param  {dom object} target
  * @param  {string} attr
  */
-var getAttr = function ( target, attr) {
+var getAttr = function ( target, attr ) {
     if ( target.hasAttribute( attr ) ) return target.getAttribute( attr );
 },
+
+/**
+ * wraps an element with another
+ * @param {object} the element doing the wrapping
+ * @param {object} the element being wrapped
+ */
+var wrapElement = function( wrapper, element ) {
+                
+    // Cache the current parent and sibling.
+    var parent  = element.parentNode;
+    var sibling = element.nextSibling;
+                
+    // Wrap the element (is automatically removed from its current parent).
+    wrapper.appendChild( element );
+                
+    // If the element had a sibling, insert the wrapper before
+    // the sibling to maintain the HTML structure; otherwise, just
+    // append it to the parent.
+    if ( sibling ) {
+        parent.insertBefore( wrapper, sibling );
+    } else {
+        parent.appendChild( wrapper );
+    }
+
+    // return the container
+    return wrapper;
+}
