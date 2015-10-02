@@ -47,3 +47,15 @@ var isArray = function ( a ) {
 }
 // IE9+ Version
 Array.isArray( a );
+
+/**
+ * loops through an array runs callback and passes in key and value
+ * @param {array} the array
+ * @param {function} callback function
+ * @param {object} optional scope parameter 
+ */
+var forEach = function ( array, callback, scope ) {
+    for (var i = 0; i < array.length; i++) {
+        callback.call(scope, i, array[i]);
+    }
+}
