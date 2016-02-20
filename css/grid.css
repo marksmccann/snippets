@@ -1,0 +1,247 @@
+/* base (small) -------------------------- */
+
+.grid:after,
+.grid-halves:after,
+.grid-thirds:after,
+.grid-fourths:after,
+.grid-block:after,
+.grid-custom:after,
+.grid-form-row:after {
+    clear: both;
+    content: '';
+    display: block;
+}
+
+.grid-block {
+    float: left;
+    width: 100%;
+    margin-bottom: .9375rem; /* 15px */
+}
+
+.grid-block:last-child,
+.grid-custom .grid-block,
+.grid-form-row .grid-block {
+    margin-bottom: 0;
+}
+
+.grid-padding .grid-content {        
+    padding: .9375rem; /* 15px */
+}
+
+/* grid form --------------------------------- */
+
+.grid-form-row {
+    border-bottom: 1px solid #e0cedc; /* USAA Warm Gray â€” Medium */
+}
+
+.grid-form-row:last-child {
+    border-bottom-style: none;
+}
+
+.grid-form-row .grid-content {
+    padding: 1.25rem 0; /* 20px 0*/
+}
+
+/* base (medium) -------------------------- */
+
+@media screen and (min-width:30.625rem) {
+
+    /* padding for content -------------- */
+
+    .grid-halves.grid-padded .grid-content {
+        padding: 1.875rem; /* 30px */
+    }
+
+    /* margin after each block -------------- */
+
+    .grid .grid-block,
+    .grid-halves .grid-block,
+    .grid-thirds .grid-block,
+    .grid-fourths .grid-block {
+        margin-bottom: 1.875rem; /* 30px */
+    }
+
+    /* widths -------------- */
+
+    .grid-halves .grid-block,
+    .grid-fourths .grid-block {
+        width: 50%;
+    }
+
+    .grid-thirds .grid-block {
+        width: 33.33%;
+    }
+
+    .grid-form .grid-block:nth-child(odd) {
+        width: 25%;
+    }
+
+    .grid-form .grid-block:nth-child(even) {
+        width: 75%;
+    }
+
+    /* horizontal spacing for 2-column grid -------------- */
+
+    .grid-halves .grid-block:nth-child(odd) .grid-content,
+    .grid-fourths .grid-block:nth-child(odd) .grid-content {
+        margin-right: .9375rem; /* 15px */
+    }
+
+    .grid-halves .grid-block:nth-child(even) .grid-content,
+    .grid-fourths .grid-block:nth-child(even) .grid-content {
+        margin-left: .9375rem; /* 15px */
+    }
+
+    /* horizontal spacing for 3-column grid -------------- */
+
+    .grid-thirds .grid-block:nth-child(3n+1) .grid-content {
+        margin-right: 1.25rem; /* 20px */
+    }
+
+    .grid-thirds .grid-block:nth-child(3n+2) .grid-content {
+        margin-left: .625rem; /* 10px */
+        margin-right: .625rem; /* 10px */
+    }
+
+    .grid-thirds .grid-block:nth-child(3n+3) .grid-content {
+        margin-left: 1.25rem; /* 20px */
+    }
+
+    /* removes margin for last row -------------- */
+
+    .grid .grid-block:last-child,
+    .grid-halves .grid-block:nth-last-child(-n+2),
+    .grid-thirds .grid-block:nth-last-child(-n+3),
+    .grid-fourths .grid-block:nth-last-child(-n+2) {
+        margin-bottom: 0;
+    }
+
+}
+
+/* base (large) -------------------------- */
+
+@media screen and (min-width:50rem) {
+
+    /* margin after each block -------------- */
+
+    .grid .grid-block,
+    .grid-halves .grid-block {
+        margin-bottom: 2.8125rem; /* 45px */
+    }
+
+    /* widths -------------- */
+
+    .grid-fourths .grid-block {
+        width: 25%;
+    }
+
+    /* horizontal spacing for 2-column grid -------------- */
+
+    .grid-halves .grid-block:nth-child(odd) .grid-content {
+        margin-right: 1.40625rem; /* 22.5px */
+    }
+
+    .grid-halves .grid-block:nth-child(even) .grid-content {
+        margin-left: 1.40625rem; /* 22.5px */
+    }
+
+    /* horizontal spacing for 4-column grid -------------- */
+
+    .grid-fourths .grid-block:nth-child(4n+1) .grid-content {
+        margin-left: 0;
+        margin-right: 1.25rem; /* 20px */
+    }
+
+    .grid-fourths .grid-block:nth-child(4n+2) .grid-content {
+        margin-left: .625rem; /* 10px */
+        margin-right: .9375rem; /* 15px */
+    }
+
+    .grid-fourths .grid-block:nth-child(4n+3) .grid-content {
+        margin-left: .9375rem; /* 15px */
+        margin-right: .625rem; /* 10px */
+    }
+
+    .grid-fourths .grid-block:nth-child(4n+4) .grid-content {
+        margin-left: 1.25rem; /* 20px */
+        margin-right: 0;
+    }
+
+    /* removes margin for last row -------------- */
+
+    .grid .grid-block:last-child,
+    .grid-fourths .grid-block:nth-last-child(-n+4) {
+        margin-bottom: 0;
+    }
+
+}
+
+/* custom grid -------------------------------- */
+
+.grid-1of2,
+.grid-2of4,
+.grid-3of6 { width: 50%; }
+.grid-1of3,
+.grid-2of6 { width: 33.33%; }
+.grid-2of3,
+.grid-4of6 { width: 66.67%; }
+.grid-1of4 { width: 25%; }
+.grid-3of4 { width: 70%; }
+.grid-1of5 { width: 20%; }
+.grid-2of5 { width: 40%; }
+.grid-3of5 { width: 60%; }
+.grid-4of5 { width: 80%; }
+.grid-1of6 { width: 16.67%; }
+.grid-5of6 { width: 83.33%; }
+
+@media screen and (min-width:30.625rem) {
+
+    .grid-1of1-medium { width: 100%; }
+    .grid-1of2-medium,
+    .grid-2of4-medium,
+    .grid-3of6-medium { width: 50%; }
+    .grid-1of3-medium,
+    .grid-2of6-medium { width: 33.33%; }
+    .grid-2of3-medium,
+    .grid-4of6-medium { width: 66.67%; }
+    .grid-1of4-medium { width: 25%; }
+    .grid-3of4-medium { width: 70%; }
+    .grid-1of5-medium { width: 20%; }
+    .grid-2of5-medium { width: 40%; }
+    .grid-3of5-medium { width: 60%; }
+    .grid-4of5-medium { width: 80%; }
+    .grid-1of6-medium { width: 16.67%; }
+    .grid-5of6-medium { width: 83.33%; }
+
+}
+
+@media screen and (min-width:50rem) {
+
+    .grid-1of1-large { width: 100%; }
+    .grid-1of2-large,
+    .grid-2of4-large,
+    .grid-3of6-large { width: 50%; }
+    .grid-1of3-large,
+    .grid-2of6-large { width: 33.33%; }
+    .grid-2of3-large,
+    .grid-4of6-large { width: 66.67%; }
+    .grid-1of4-large { width: 25%; }
+    .grid-3of4-large { width: 70%; }
+    .grid-1of5-large { width: 20%; }
+    .grid-2of5-large { width: 40%; }
+    .grid-3of5-large { width: 60%; }
+    .grid-4of5-large { width: 80%; }
+    .grid-1of6-large { width: 16.67%; }
+    .grid-5of6-large { width: 83.33%; }
+
+}
+
+
+
+
+
+
+
+
+
+
