@@ -1,4 +1,4 @@
-/* base (small) -------------------------- */
+/* small -------------------------- */
 
 .grid:after,
 .grid-halves:after,
@@ -26,7 +26,7 @@
     padding: .9375rem; /* 15px */
 }
 
-/* base (medium) -------------------------- */
+/* medium -------------------------- */
 
 @media screen and (min-width:30.625rem) {
 
@@ -94,7 +94,7 @@
 
 }
 
-/* base (large) -------------------------- */
+/* large -------------------------- */
 
 @media screen and (min-width:50rem) {
 
