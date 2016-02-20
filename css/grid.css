@@ -5,8 +5,7 @@
 .grid-thirds:after,
 .grid-fourths:after,
 .grid-block:after,
-.grid-custom:after,
-.grid-form-row:after {
+.grid-custom:after {
     clear: both;
     content: '';
     display: block;
@@ -19,27 +18,12 @@
 }
 
 .grid-block:last-child,
-.grid-custom .grid-block,
-.grid-form-row .grid-block {
+.grid-custom .grid-block {
     margin-bottom: 0;
 }
 
 .grid-padding .grid-content {        
     padding: .9375rem; /* 15px */
-}
-
-/* grid form --------------------------------- */
-
-.grid-form-row {
-    border-bottom: 1px solid #e0cedc; /* USAA Warm Gray â€” Medium */
-}
-
-.grid-form-row:last-child {
-    border-bottom-style: none;
-}
-
-.grid-form-row .grid-content {
-    padding: 1.25rem 0; /* 20px 0*/
 }
 
 /* base (medium) -------------------------- */
@@ -70,14 +54,6 @@
 
     .grid-thirds .grid-block {
         width: 33.33%;
-    }
-
-    .grid-form .grid-block:nth-child(odd) {
-        width: 25%;
-    }
-
-    .grid-form .grid-block:nth-child(even) {
-        width: 75%;
     }
 
     /* horizontal spacing for 2-column grid -------------- */
