@@ -1,10 +1,15 @@
 /**
- * grid
+ * css grid system
+ * @author Mark McCann (www.markmccann.me)
+ * @license MIT
  */
 
 /* clearfix the containing element ---------------- */
 
-.grid-halves {
+.grid-halves,
+.grid-thirds,
+.grid-fourths,
+.grid-custom {
     &:after {
         clear: both;
         content: '';
@@ -12,7 +17,7 @@
     }
 }
 
-/* default blocks ------------------ */
+/* default block styling ------------------ */
 
 .grid-block {
     box-sizing: border-box;
@@ -23,34 +28,65 @@
 /* grid widths ------------------------------ */
 
 .grid-fixed.grid-halves .grid-block { width: 50%; }
+.grid-fixed.grid-thirds .grid-block { width: 33.3334%; }
+.grid-fixed.grid-fourths .grid-block { width: 25%; }
 
-@media screen and (min-width:36rem) {
+@media screen and (min-width:@medium) {
 
-    .grid-halves .grid-block { width: 50%; }
+    .grid-halves .grid-block,
+    .grid-fourths .grid-block { 
+        width: 50%; 
+    }
+
+    .grid-thirds .grid-block { width: 33.3334%; }
+
+}
+
+@media screen and (min-width:@large) {
+
+    .grid-fourths .grid-block { width: 25%; }
 
 }
 
 /* space between blocks -------------------- */
 
-@halves-margin: 20px;
+// breakpoints
+@medium: 30.625rem; // 490px
+@large: 50rem; // 800px
+// margin for small screens
+@halves-margin: 1.25rem; // 20px 
+@thirds-margin: .9375rem; // 15px
+@fourths-margin: .625rem; // 10px
 // margins for medium screens
-@halves-margin-medium: 30px;
+@halves-margin-medium: 1.875rem; // 30px
+@thirds-margin-medium: 1.25rem; // 20px 
+@fourths-margin-medium: .9375rem; // 15px
 // margins for large screens
-@halves-margin-large: 40px;
+@halves-margin-large: 2.8125rem; // 45px
+@thirds-margin-large: 1.875rem; // 30px
+@fourths-margin-large: 1.25rem; // 20px
 
 /* vertical spacing (below each block) ------------ */
 
-.grid-halves .grid-block { padding-bottom: @halves-margin; }
+.grid-halves .grid-block,
+.grid-thirds .grid-block,
+.grid-fourths .grid-block {
+    padding-bottom: @halves-margin; 
+}
 
-@media screen and (min-width:36rem) {
+@media screen and (min-width:@medium) {
 
     .grid-halves .grid-block { padding-bottom: @halves-margin-medium; }
+    .grid-thirds .grid-block { padding-bottom: @thirds-margin-medium; }
+    .grid-fourths .grid-block { padding-bottom: @halves-margin-medium; }
 
 }
 
-@media screen and (min-width:50rem) {
+@media screen and (min-width:@large) {
 
     .grid-halves .grid-block { padding-bottom: @halves-margin-large; }
+    .grid-thirds .grid-block { padding-bottom: @thirds-margin-large; }
+    .grid-fourths .grid-block { padding-bottom: @fourths-margin-large; }
 
 }
 
@@ -61,23 +97,24 @@
 }
 
 .grid-fixed.grid-halves > :nth-child(even) { 
-    padding-left: round(@halves-margin * .5, 4); 
+    padding-left: round(@halves-margin * .5, 4);
 }
 
-@media screen and (min-width:36rem) {
+@media screen and (min-width:@medium) {
 
     .grid-halves > .grid-block:nth-child(odd),
-    .grid-halves > .grid-block:nth-child(odd) {
+    .grid-fourths > .grid-block:nth-child(odd) {
         padding-right: round(@halves-margin-medium * .5, 4); 
     }
 
-    .grid-halves > .grid-block:nth-child(even) {
+    .grid-halves > .grid-block:nth-child(even),
+    .grid-fourths > .grid-block:nth-child(even) {
         padding-left: round(@halves-margin-medium * .5, 4); 
     }
 
 }
 
-@media screen and (min-width:50rem) {
+@media screen and (min-width:@large) {
 
     .grid-halves > .grid-block:nth-child(odd) {
         padding-right: round(@halves-margin-large * .5, 4); 
@@ -89,16 +126,147 @@
 
 }
 
+/* horizontal spacing for three columns ------------ */
+
+.grid-fixed.grid-thirds > :nth-child(3n+1) { 
+    padding-right: round(@thirds-margin * .6667, 4); 
+}
+
+.grid-fixed.grid-thirds > :nth-child(3n+2) { 
+    padding-left: round(@thirds-margin * .3334, 4); 
+    padding-right: round(@thirds-margin * .3334, 4); 
+}
+
+.grid-fixed.grid-thirds > :nth-child(3n+3) { 
+    padding-left: round(@thirds-margin * .6667, 4); 
+}
+
+@media screen and (min-width:@medium) {
+
+    .grid-thirds > .grid-block:nth-child(3n+1) { 
+        padding-right: round(@thirds-margin-medium * .6667, 4); 
+    }
+
+    .grid-thirds > .grid-block:nth-child(3n+2) { 
+        padding-left: round(@thirds-margin-medium * .3334, 4); 
+        padding-right: round(@thirds-margin-medium * .3334, 4); 
+    }
+
+    .grid-thirds > .grid-block:nth-child(3n+3) { 
+        padding-left: round(@thirds-margin-medium * .6667, 4); 
+    }
+
+}
+
+@media screen and (min-width:@large) {
+
+    .grid-thirds > .grid-block:nth-child(3n+1) { 
+        padding-right: round(@thirds-margin-large * .6667, 4); 
+    }
+
+    .grid-thirds > .grid-block:nth-child(3n+2) { 
+        padding-left: round(@thirds-margin-large * .3334, 4); 
+        padding-right: round(@thirds-margin-large * .3334, 4); 
+    }
+
+    .grid-thirds > .grid-block:nth-child(3n+3) { 
+        padding-left: round(@thirds-margin-large * .6667, 4); 
+    }
+
+}
+
+/* horizontal spacing for four columns ------------ */
+
+.grid-fixed.grid-fourths > :nth-child(4n+1) { 
+    padding-right: round(@thirds-margin * .6667, 4); 
+}
+
+.grid-fixed.grid-fourths > :nth-child(4n+2) { 
+    padding-left: round(@thirds-margin * .3334, 4); 
+    padding-right: round(@thirds-margin * .5, 4); 
+}
+
+.grid-fixed.grid-fourths > :nth-child(4n+3) { 
+    padding-left: round(@thirds-margin * .5, 4); 
+    padding-right: round(@thirds-margin * .3334, 4); 
+}
+
+.grid-fixed.grid-fourths > :nth-child(4n+4) { 
+    padding-left: round(@thirds-margin * .6667, 4); 
+}
+
+@media screen and (min-width:@medium) {
+
+    .grid-fixed.grid-fourths > :nth-child(4n+1) { 
+        padding-right: round(@thirds-margin-medium * .6667, 4); 
+    }
+
+    .grid-fixed.grid-fourths > :nth-child(4n+2) { 
+        padding-left: round(@thirds-margin-medium * .3334, 4); 
+        padding-right: round(@thirds-margin-medium * .5, 4);
+    }
+
+    .grid-fixed.grid-fourths > :nth-child(4n+3) { 
+        padding-left: round(@thirds-margin-medium * .5, 4); 
+        padding-right: round(@thirds-margin-medium * .3334, 4); 
+    }
+
+    .grid-fixed.grid-fourths > :nth-child(4n+4) { 
+        padding-left: round(@thirds-margin-medium * .6667, 4); 
+    }
+
+}
+
+@media screen and (min-width:@large) {
+
+    .grid-fourths > .grid-block:nth-child(4n+1) { 
+        padding-right: round(@thirds-margin-large * .6667, 4); 
+    }
+
+    .grid-fourths > .grid-block:nth-child(4n+2) { 
+        padding-left: round(@thirds-margin-large * .3334, 4); 
+        padding-right: round(@thirds-margin-large * .5, 4); 
+    }
+
+    .grid-fourths > .grid-block:nth-child(4n+3) { 
+        padding-left: round(@thirds-margin-large * .5, 4); 
+        padding-right: round(@thirds-margin-large * .3334, 4); 
+    }
+
+    .grid-fourths > .grid-block:nth-child(4n+4) { 
+        padding-left: round(@thirds-margin-large * .6667, 4); 
+    }
+
+}
+
 /* remove vertical spacing from last rows -------------- */
 
 .grid-block:last-child,
-.grid-fixed.grid-halves > :nth-child(odd):nth-last-child(-n+2) {
+.grid-fixed.grid-halves > :nth-child(odd):nth-last-child(-n+2),
+.grid-fixed.grid-thirds > :nth-child(3n+1):nth-last-child(-n+3),
+.grid-fixed.grid-thirds > :nth-child(3n+2):nth-last-child(-n+2),
+.grid-fixed.grid-fourths > :nth-child(4n+1):nth-last-child(-n+4),
+.grid-fixed.grid-fourths > :nth-child(4n+2):nth-last-child(-n+3),
+.grid-fixed.grid-fourths > :nth-child(4n+3):nth-last-child(-n+2) {
     padding-bottom: 0;
 }
 
-@media screen and (min-width:36rem) {
+@media screen and (min-width:@medium) {
 
-    .grid-halves > :nth-child(odd):nth-last-child(-n+2) {
+    .grid-halves > :nth-child(odd):nth-last-child(-n+2),
+    .grid-thirds > :nth-child(3n+1):nth-last-child(-n+3),
+    .grid-thirds > :nth-child(2n+1):nth-last-child(-n+2),
+    .grid-fourths > :nth-child(odd):nth-last-child(-n+2) {
+        padding-bottom: 0;
+    }
+
+}
+
+@media screen and (min-width:@large) {
+
+    .grid-fourths > :nth-child(4n+1):nth-last-child(-n+4),
+    .grid-fourths > :nth-child(4n+2):nth-last-child(-n+3),
+    .grid-fourths > :nth-child(4n+3):nth-last-child(-n+2) {
         padding-bottom: 0;
     }
 
@@ -106,26 +274,100 @@
 
 /* remove spacing ------------------------- */
 
-.grid-flush.grid-halves .grid-block {
-    padding-bottom: 0;
+.grid-collapse.grid-halves .grid-block,
+.grid-collapse.grid-thirds .grid-block,
+.grid-collapse.grid-fourths .grid-block {
+    padding: 0;
 }
 
-.grid-flush.grid-halves > :nth-child(odd) {
-    padding-right: 0;
+/* custom grid ------------------ */
+
+.grid-custom .grid-span {
+    width: 100%;
 }
 
-.grid-flush.grid-halves > :nth-child(even) {
-    padding-left: 0;
+.grid-custom .grid-one-half,
+.grid-fixed .grid-block.grid-one-half { 
+    width: 50%; 
 }
 
-/* customize column widths ------------------ */
+.grid-custom .grid-one-third,
+.grid-fixed .grid-block.grid-one-third { 
+    width: 33.3334%; 
+}
 
-.grid-fixed .grid-block.grid-2of3 { width: 66.6667% }
-.grid-fixed .grid-block.grid-1of3 { width: 33.3334% }
+.grid-custom .grid-two-thirds,
+.grid-fixed .grid-block.grid-two-thirds { 
+    width: 66.6667%;
+}
 
-@media screen and (min-width:36rem) {
+.grid-custom .grid-one-fourth,
+.grid-fixed .grid-block.grid-one-fourth { 
+    width: 25%;
+}
 
-    .grid-block.grid-2of3 { width: 66.6667% }
-    .grid-block.grid-1of3 { width: 33.3334% }
+.grid-custom .grid-three-fourth,
+.grid-fixed .grid-block.grid-three-fourth { 
+    width: 75%;
+}
+
+@media screen and (min-width:@medium) {
+
+    .grid-span-medium {
+        width: 100%;
+    }
+
+    .grid-one-half-medium,
+    .grid-block.grid-one-half { 
+        width: 50%; 
+    }
+
+    .grid-one-third-medium,
+    .grid-block.grid-one-third {
+        width: 33.3334%;
+    }
+
+    .grid-two-thirds-medium,
+    .grid-block.grid-two-thirds { 
+        width: 66.6667%;
+    }
+
+    .grid-one-fourth-medium,
+    .grid-block.grid-one-fourth { 
+        width: 25%;
+    }
+
+    .grid-three-fourth-medium,
+    .grid-block.grid-three-fourth { 
+        width: 75%;
+    }
+
+}
+
+@media screen and (min-width:@large) {
+
+    .grid-span-large {
+        width: 100%;
+    }
+
+    .grid-one-half-large {
+        width: 50%; 
+    }
+
+    .grid-one-third-large {
+        width: 33.3334%; 
+    }
+
+    .grid-two-thirds-large {
+        width: 66.6667%;
+    }
+
+    .grid-one-fourth-large {
+        width: 25%;
+    }
+
+    .grid-three-fourth-large {
+        width: 75%;
+    }
 
 }
