@@ -3,6 +3,26 @@
  * @author Mark McCann (www.markmccann.me)
  * @license MIT
  */
+ 
+// breakpoints
+@medium: 30.625rem; // 490px
+@large: 50rem; // 800px
+// margin for small screens
+@halves-margin: 1.25rem; // 20px 
+@thirds-margin: .9375rem; // 15px
+@fourths-margin: .625rem; // 10px
+// margins for medium screens
+@halves-margin-medium: 1.875rem; // 30px
+@thirds-margin-medium: 1.25rem; // 20px 
+@fourths-margin-medium: .9375rem; // 15px
+// margins for large screens
+@halves-margin-large: 2.8125rem; // 45px
+@thirds-margin-large: 1.875rem; // 30px
+@fourths-margin-large: 1.25rem; // 20px
+// padding for content
+@content-padding: .5rem; // 8px
+@content-padding-medium: .625rem; // 10px
+@content-padding-large: .9375rem; // 15px
 
 /* clearfix the containing element ---------------- */
 
@@ -23,6 +43,28 @@
     box-sizing: border-box;
     float: left;
     width: 100%;
+}
+
+/* default block styling ------------------ */
+
+.grid-content {
+    padding: @content-padding;
+}
+
+@media screen and (min-width:@medium) {
+
+    .grid-content {
+        padding: @content-padding-medium;
+    }
+
+}
+
+@media screen and (min-width:@large) {
+
+    .grid-content {
+        padding: @content-padding-large;
+    }
+
 }
 
 /* grid widths ------------------------------ */
@@ -47,24 +89,6 @@
     .grid-fourths .grid-block { width: 25%; }
 
 }
-
-/* space between blocks -------------------- */
-
-// breakpoints
-@medium: 30.625rem; // 490px
-@large: 50rem; // 800px
-// margin for small screens
-@halves-margin: 1.25rem; // 20px 
-@thirds-margin: .9375rem; // 15px
-@fourths-margin: .625rem; // 10px
-// margins for medium screens
-@halves-margin-medium: 1.875rem; // 30px
-@thirds-margin-medium: 1.25rem; // 20px 
-@fourths-margin-medium: .9375rem; // 15px
-// margins for large screens
-@halves-margin-large: 2.8125rem; // 45px
-@thirds-margin-large: 1.875rem; // 30px
-@fourths-margin-large: 1.25rem; // 20px
 
 /* vertical spacing (below each block) ------------ */
 
