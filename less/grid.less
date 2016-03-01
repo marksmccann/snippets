@@ -250,7 +250,7 @@
 .grid-thirds,
 .grid-fourths  {
     .grid-block {
-        padding-bottom: @halves-margin; 
+        padding-bottom: @halves-margin;
     }
 }
 
@@ -279,6 +279,7 @@
         }
     }
     
+    .grid-block:last-child,
     .grid-halves > :nth-child(odd):nth-last-child(-n+2),
     .grid-thirds > :nth-child(3n+1):nth-last-child(-n+3),
     .grid-thirds > :nth-child(2n+1):nth-last-child(-n+2),
@@ -294,6 +295,7 @@
     .grid-thirds .grid-block { padding-bottom: @thirds-margin-large; }
     .grid-fourths .grid-block { padding-bottom: @fourths-margin-large; }
     
+    .grid-block:last-child,
     .grid-fourths > :nth-child(4n+1):nth-last-child(-n+4),
     .grid-fourths > :nth-child(4n+2):nth-last-child(-n+3),
     .grid-fourths > :nth-child(4n+3):nth-last-child(-n+2) {
