@@ -217,7 +217,25 @@
         >:nth-child(even) { 
             padding-left: round(@halves-margin * .5, 4);
         }
+        @media screen and (min-width:@medium) {
+            >:nth-child(odd) { 
+                padding-right: round(@halves-margin-medium * .5, 4);
+            }
+            >:nth-child(even) { 
+                padding-left: round(@halves-margin-medium * .5, 4);
+            }
+        }
+        @media screen and (min-width:@large) {
+            >:nth-child(odd) { 
+                padding-right: round(@halves-margin-large * .5, 4);
+            }
+            >:nth-child(even) { 
+                padding-left: round(@halves-margin-large * .5, 4);
+            }
+        }
     }
+
+   
     
     // three columns ---------
     
@@ -234,6 +252,30 @@
         }
         >:nth-child(3n+3) { 
             padding-left: round(@thirds-margin * .6667, 4); 
+        }
+        @media screen and (min-width:@medium) {
+            >:nth-child(3n+1) { 
+                padding-right: round(@thirds-margin-medium * .6667, 4); 
+            }
+            >:nth-child(3n+2) { 
+                padding-left: round(@thirds-margin-medium * .3334, 4); 
+                padding-right: round(@thirds-margin-medium * .3334, 4); 
+            }
+            >:nth-child(3n+3) { 
+                padding-left: round(@thirds-margin-medium * .6667, 4); 
+            }
+        }
+        @media screen and (min-width:@large) {
+            >:nth-child(3n+1) { 
+                padding-right: round(@thirds-margin-large * .6667, 4); 
+            }
+            >:nth-child(3n+2) { 
+                padding-left: round(@thirds-margin-large * .3334, 4); 
+                padding-right: round(@thirds-margin-large * .3334, 4); 
+            }
+            >:nth-child(3n+3) { 
+                padding-left: round(@thirds-margin-large * .6667, 4); 
+            }
         }
     }
     
@@ -257,6 +299,38 @@
         >:nth-child(4n+4) { 
             padding-left: round(@fourths-margin * .6667, 4); 
         }
+        @media screen and (min-width:@medium) {
+            >:nth-child(4n+1) { 
+                padding-right: round(@fourths-margin-medium * .6667, 4); 
+            }
+            >:nth-child(4n+2) { 
+                padding-left: round(@fourths-margin-medium * .3334, 4); 
+                padding-right: round(@fourths-margin-medium * .5, 4); 
+            }
+            >:nth-child(4n+3) { 
+                padding-left: round(@fourths-margin-medium * .5, 4); 
+                padding-right: round(@fourths-margin-medium * .3334, 4); 
+            }
+            >:nth-child(4n+4) { 
+                padding-left: round(@fourths-margin-medium * .6667, 4); 
+            }
+        }
+        @media screen and (min-width:@large) {
+            >:nth-child(4n+1) { 
+                padding-right: round(@fourths-margin-large * .6667, 4); 
+            }
+            >:nth-child(4n+2) { 
+                padding-left: round(@fourths-margin-large * .3334, 4); 
+                padding-right: round(@fourths-margin-large * .5, 4); 
+            }
+            >:nth-child(4n+3) { 
+                padding-left: round(@fourths-margin-large * .5, 4); 
+                padding-right: round(@fourths-margin-large * .3334, 4); 
+            }
+            >:nth-child(4n+4) { 
+                padding-left: round(@fourths-margin-large * .6667, 4); 
+            }
+        }
     }
     
     // five columns ---------
@@ -266,22 +340,62 @@
             width: 20%;
         }
         >:nth-child(5n+1) {
-            padding-right: round(@fifths-margin-large * .6667, 4); 
+            padding-right: round(@fifths-margin * .6667, 4); 
         }
         >:nth-child(5n+2) {
-            padding-left: round(@fifths-margin-large * .3334, 4); 
-            padding-right: round(@fifths-margin-large * .5, 4);
+            padding-left: round(@fifths-margin * .3334, 4); 
+            padding-right: round(@fifths-margin * .5, 4);
         }
         >:nth-child(5n+3) {
-            padding-left: round(@fifths-margin-large * .5, 4); 
-            padding-right: round(@fifths-margin-large * .5, 4); 
+            padding-left: round(@fifths-margin * .5, 4); 
+            padding-right: round(@fifths-margin * .5, 4); 
         }
         >:nth-child(5n+4) {
-            padding-left: round(@fifths-margin-large * .5, 4); 
-            padding-right: round(@fifths-margin-large * .3334, 4); 
+            padding-left: round(@fifths-margin * .5, 4); 
+            padding-right: round(@fifths-margin * .3334, 4); 
         }
         >:nth-child(5n+5) {
-            padding-left: round(@fifths-margin-large * .6667, 4); 
+            padding-left: round(@fifths-margin * .6667, 4); 
+        }
+        @media screen and (min-width:@medium) {
+            >:nth-child(5n+1) {
+                padding-right: round(@fifths-margin-medium * .6667, 4); 
+            }
+            >:nth-child(5n+2) {
+                padding-left: round(@fifths-margin-medium * .3334, 4); 
+                padding-right: round(@fifths-margin-medium * .5, 4);
+            }
+            >:nth-child(5n+3) {
+                padding-left: round(@fifths-margin-medium * .5, 4); 
+                padding-right: round(@fifths-margin-medium * .5, 4); 
+            }
+            >:nth-child(5n+4) {
+                padding-left: round(@fifths-margin-medium * .5, 4); 
+                padding-right: round(@fifths-margin-medium * .3334, 4); 
+            }
+            >:nth-child(5n+5) {
+                padding-left: round(@fifths-margin-medium * .6667, 4); 
+            }
+        }
+        @media screen and (min-width:@large) {
+            >:nth-child(5n+1) {
+                padding-right: round(@fifths-margin-large * .6667, 4); 
+            }
+            >:nth-child(5n+2) {
+                padding-left: round(@fifths-margin-large * .3334, 4); 
+                padding-right: round(@fifths-margin-large * .5, 4);
+            }
+            >:nth-child(5n+3) {
+                padding-left: round(@fifths-margin-large * .5, 4); 
+                padding-right: round(@fifths-margin-large * .5, 4); 
+            }
+            >:nth-child(5n+4) {
+                padding-left: round(@fifths-margin-large * .5, 4); 
+                padding-right: round(@fifths-margin-large * .3334, 4); 
+            }
+            >:nth-child(5n+5) {
+                padding-left: round(@fifths-margin-large * .6667, 4); 
+            }
         }
     }
     
