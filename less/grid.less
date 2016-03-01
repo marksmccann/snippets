@@ -1,0 +1,131 @@
+/**
+ * grid
+ */
+
+/* clearfix the containing element ---------------- */
+
+.grid-halves {
+    &:after {
+        clear: both;
+        content: '';
+        display: block;
+    }
+}
+
+/* default blocks ------------------ */
+
+.grid-block {
+    box-sizing: border-box;
+    float: left;
+    width: 100%;
+}
+
+/* grid widths ------------------------------ */
+
+.grid-fixed.grid-halves .grid-block { width: 50%; }
+
+@media screen and (min-width:36rem) {
+
+    .grid-halves .grid-block { width: 50%; }
+
+}
+
+/* space between blocks -------------------- */
+
+@halves-margin: 20px;
+// margins for medium screens
+@halves-margin-medium: 30px;
+// margins for large screens
+@halves-margin-large: 40px;
+
+/* vertical spacing (below each block) ------------ */
+
+.grid-halves .grid-block { padding-bottom: @halves-margin; }
+
+@media screen and (min-width:36rem) {
+
+    .grid-halves .grid-block { padding-bottom: @halves-margin-medium; }
+
+}
+
+@media screen and (min-width:50rem) {
+
+    .grid-halves .grid-block { padding-bottom: @halves-margin-large; }
+
+}
+
+/* horizontal spacing for two columns ------------ */
+
+.grid-fixed.grid-halves > :nth-child(odd) { 
+    padding-right: round(@halves-margin * .5, 4); 
+}
+
+.grid-fixed.grid-halves > :nth-child(even) { 
+    padding-left: round(@halves-margin * .5, 4); 
+}
+
+@media screen and (min-width:36rem) {
+
+    .grid-halves > .grid-block:nth-child(odd),
+    .grid-halves > .grid-block:nth-child(odd) {
+        padding-right: round(@halves-margin-medium * .5, 4); 
+    }
+
+    .grid-halves > .grid-block:nth-child(even) {
+        padding-left: round(@halves-margin-medium * .5, 4); 
+    }
+
+}
+
+@media screen and (min-width:50rem) {
+
+    .grid-halves > .grid-block:nth-child(odd) {
+        padding-right: round(@halves-margin-large * .5, 4); 
+    }
+
+    .grid-halves > .grid-block:nth-child(even) {
+        padding-left: round(@halves-margin-large * .5, 4); 
+    }
+
+}
+
+/* remove vertical spacing from last rows -------------- */
+
+.grid-block:last-child,
+.grid-fixed.grid-halves > :nth-child(odd):nth-last-child(-n+2) {
+    padding-bottom: 0;
+}
+
+@media screen and (min-width:36rem) {
+
+    .grid-halves > :nth-child(odd):nth-last-child(-n+2) {
+        padding-bottom: 0;
+    }
+
+}
+
+/* remove spacing ------------------------- */
+
+.grid-flush.grid-halves .grid-block {
+    padding-bottom: 0;
+}
+
+.grid-flush.grid-halves > :nth-child(odd) {
+    padding-right: 0;
+}
+
+.grid-flush.grid-halves > :nth-child(even) {
+    padding-left: 0;
+}
+
+/* customize column widths ------------------ */
+
+.grid-fixed .grid-block.grid-2of3 { width: 66.6667% }
+.grid-fixed .grid-block.grid-1of3 { width: 33.3334% }
+
+@media screen and (min-width:36rem) {
+
+    .grid-block.grid-2of3 { width: 66.6667% }
+    .grid-block.grid-1of3 { width: 33.3334% }
+
+}
