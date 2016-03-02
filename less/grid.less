@@ -67,7 +67,7 @@
     
     .grid-halves,
     .grid-fourths  {
-        .grid-block {
+        >.grid-block {
             width: 50%;
             &:nth-child(odd) {
                 padding-right: round(@halves-margin-medium * .5, 4); 
@@ -83,7 +83,7 @@
     .grid-thirds,
     .grid-fifths,
     .grid-sixths {
-        .grid-block {
+        >.grid-block {
             width: 33.3334%;
             &:nth-child(3n+1) { 
                 padding-right: round(@thirds-margin-medium * .6667, 4); 
@@ -132,7 +132,7 @@
     // two columns -------------
     
     .grid-halves {
-        .grid-block {
+        >.grid-block {
             &:nth-child(odd) {
                 padding-right: round(@halves-margin-large * .5, 4); 
             }
@@ -162,7 +162,7 @@
     // four columns -----------
     
     .grid-fourths {
-        .grid-block {
+        >.grid-block {
             width: 25%;
             &:nth-child(4n+1) {
                 padding-right: round(@fourths-margin-large * .6667, 4); 
@@ -184,7 +184,7 @@
     // five columns -----------
     
     .grid-fifths {
-        .grid-block {
+        >.grid-block {
             width: 20%;
             &:nth-child(5n+1) {
                 padding-left: 0;
@@ -212,7 +212,7 @@
     // six columns -----------
     
     .grid-sixths {
-        .grid-block {
+        >.grid-block {
             width: 16.6667%;
             &:nth-child(6n+1) {
                 padding-left: 0;
@@ -268,7 +268,7 @@
     // two columns ---------
     
     &.grid-halves {
-        .grid-block {
+        >.grid-block {
             width: 50%;
         }
         >:nth-child(odd) { 
@@ -298,7 +298,7 @@
     // three columns ---------
     
     &.grid-thirds {
-        .grid-block { 
+        >.grid-block { 
             width: 33.3334%; 
         }
         >:nth-child(3n+1) { 
@@ -340,7 +340,7 @@
     // four columns ---------
     
     &.grid-fourths {
-        .grid-block { 
+        >.grid-block { 
             width: 25%; 
         }
         >:nth-child(4n+1) { 
@@ -394,7 +394,7 @@
     // five columns ---------
     
     &.grid-fifths {
-        .grid-block {
+        >.grid-block {
             width: 20%;
         }
         >:nth-child(5n+1) {
@@ -460,7 +460,7 @@
     // five columns ---------
     
     &.grid-sixths {
-        .grid-block {
+        >.grid-block {
             width: 16.6667%;
         }
         >:nth-child(6n+1) {
@@ -682,6 +682,7 @@
 /* collapse spacing -------------------------------------------------------- */
 
 .grid-collapse {
+    &.grid,
     &.grid-halves,
     &.grid-thirds,
     &.grid-fourths,
