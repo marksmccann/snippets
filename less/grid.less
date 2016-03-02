@@ -1,21 +1,22 @@
-/**
- * css grid system
- * @author Mark McCann (www.markmccann.me)
- * @license MIT
- */
- 
+/*
+<div class="grid grid-halves-medium grid-thirds-large">
+    <div class="grid-block"></div>
+    <div class="grid-block"></div>
+</div>
+*/
+
 // breakpoints
 @medium: 30.625rem; // 490px
 @large: 50rem; // 800px
 // margin for small screens
-@halves-margin: 1.25rem; // 20px 
+@halves-margin: 1.25rem; // 20px
 @thirds-margin: .9375rem; // 15px
 @fourths-margin: .625rem; // 10px
 @fifths-margin: .5rem; // 8px
 @sixths-margin: .5rem; // 8px
 // margins for medium screens
 @halves-margin-medium: 1.875rem; // 30px
-@thirds-margin-medium: 1.25rem; // 20px 
+@thirds-margin-medium: 1.25rem; // 20px
 @fourths-margin-medium: .9375rem; // 15px
 @fifths-margin-medium: .625rem; // 10px
 @sixths-margin-medium: .625rem; // 10px
@@ -30,7 +31,7 @@
 @content-padding-medium: .625rem; // 10px
 @content-padding-large: .9375rem; // 15px
 
-/* default (responsive) layout ---------------------------------------------- */
+/* default styles for grid -------------------------------------------- */
 
 .grid,
 .grid-halves,
@@ -51,256 +52,43 @@
     width: 100%;
 }
 
-.grid-content {
-    padding: @content-padding;
+/* single column ----------- */
+
+.grid {
+    &:not(.grid-collapse) {
+        >:not(:last-child) {
+            padding-bottom: @halves-margin; 
+        }
+    }
 }
 
-// medium screen ----------
-
-@media screen and (min-width:@medium) {
- 
-    .grid-content {
-        padding: @content-padding-medium;
+/* two columns ----------- */
+    
+.grid-halves  {
+    >.grid-block {
+        width: 50%;
     }
-    
-    // two columns -----------
-    
-    .grid-halves,
-    .grid-fourths  {
-        >.grid-block {
-            width: 50%;
-            &:nth-child(odd) {
-                padding-right: round(@halves-margin-medium * .5, 4); 
-            }
-            &:nth-child(even) {
-                padding-left: round(@halves-margin-medium * .5, 4); 
-            }
+    &:not(.grid-collapse) {
+        >:nth-child(odd) {
+            padding-right: round(@halves-margin * .5, 4); 
+        }
+        >:nth-child(even) {
+            padding-left: round(@halves-margin * .5, 4); 
+        }
+        >:not(:nth-last-child(-n+2)),
+        >:nth-child(2n+2):nth-last-child(-2n+2) {
+            padding-bottom: @halves-margin;
         }
     }
-
-    // three columns -----------
-    
-    .grid-thirds,
-    .grid-fifths,
-    .grid-sixths {
-        >.grid-block {
-            width: 33.3334%;
-            &:nth-child(3n+1) { 
-                padding-right: round(@thirds-margin-medium * .6667, 4); 
-            }
-            &:nth-child(3n+2) { 
-                padding-left: round(@thirds-margin-medium * .3334, 4); 
-                padding-right: round(@thirds-margin-medium * .3334, 4); 
-            }
-            &:nth-child(3n+3) { 
-                padding-left: round(@thirds-margin-medium * .6667, 4); 
-            }
-        }
-    }
-    
-    // custom widths ------------
-    
-    .grid-block {
-        &.grid-span { width: 100%;  }
-        &.grid-1of2,
-        &.grid-2of4,
-        &.grid-3of6 { width: 50%;  }
-        &.grid-1of3,
-        &.grid-2of6 { width: 33.3334%;  }
-        &.grid-2of3,
-        &.grid-4of6 { width: 66.6667%; }
-        &.grid-1of4 { width: 25%; }
-        &.grid-3of4 { width: 75%; }
-        &.grid-1of5 { width: 20%; }
-        &.grid-2of5 { width: 40%; }
-        &.grid-3of5 { width: 60%; }
-        &.grid-4of5 { width: 80%; }
-        &.grid-1of6 { width: 16.6667%; }
-        &.grid-5of6 { width: 83.3334%; }
-    }
-
 }
 
-// large screen ----------
+/* three columns ----------- */
 
-@media screen and (min-width:@large) {
- 
-    .grid-content {
-        padding: @content-padding-large;
+.grid-thirds {
+    >.grid-block {
+        width: 33.3334%;
     }
-    
-    // two columns -------------
-    
-    .grid-halves {
-        >.grid-block {
-            &:nth-child(odd) {
-                padding-right: round(@halves-margin-large * .5, 4); 
-            }
-            &:nth-child(even) {
-                padding-left: round(@halves-margin-large * .5, 4); 
-            }
-        }
-    }
-    
-    // three columns -------------
-    
-    .grid-thirds {
-        >.grid-block {
-            &:nth-child(3n+1) { 
-                padding-right: round(@thirds-margin-large * .6667, 4); 
-            }
-            &:nth-child(3n+2) { 
-                padding-left: round(@thirds-margin-large * .3334, 4); 
-                padding-right: round(@thirds-margin-large * .3334, 4); 
-            }
-            &:nth-child(3n+3) { 
-                padding-left: round(@thirds-margin-large * .6667, 4); 
-            }
-        }
-    }
-    
-    // four columns -----------
-    
-    .grid-fourths {
-        >.grid-block {
-            width: 25%;
-            &:nth-child(4n+1) {
-                padding-right: round(@fourths-margin-large * .6667, 4); 
-            }
-            &:nth-child(4n+2) {
-                padding-left: round(@fourths-margin-large * .3334, 4); 
-                padding-right: round(@fourths-margin-large * .5, 4);
-            }
-            &:nth-child(4n+3) {
-                padding-left: round(@fourths-margin-large * .5, 4); 
-                padding-right: round(@fourths-margin-large * .3334, 4); 
-            }
-            &:nth-child(4n+4) {
-                padding-left: round(@fourths-margin-large * .6667, 4); 
-            }
-        }
-    }
-    
-    // five columns -----------
-    
-    .grid-fifths {
-        >.grid-block {
-            width: 20%;
-            &:nth-child(5n+1) {
-                padding-left: 0;
-                padding-right: round(@fifths-margin-large * .6667, 4); 
-            }
-            &:nth-child(5n+2) {
-                padding-left: round(@fifths-margin-large * .3334, 4); 
-                padding-right: round(@fifths-margin-large * .5, 4);
-            }
-            &:nth-child(5n+3) {
-                padding-left: round(@fifths-margin-large * .5, 4); 
-                padding-right: round(@fifths-margin-large * .5, 4); 
-            }
-            &:nth-child(5n+4) {
-                padding-left: round(@fifths-margin-large * .5, 4); 
-                padding-right: round(@fifths-margin-large * .3334, 4); 
-            }
-            &:nth-child(5n+5) {
-                padding-left: round(@fifths-margin-large * .6667, 4); 
-                padding-right: 0;
-            }
-        }
-    }
-    
-    // six columns -----------
-    
-    .grid-sixths {
-        >.grid-block {
-            width: 16.6667%;
-            &:nth-child(6n+1) {
-                padding-left: 0;
-                padding-right: round(@sixths-margin-large * .6667, 4); 
-            }
-            &:nth-child(6n+2) {
-                padding-left: round(@sixths-margin-large * .3334, 4); 
-                padding-right: round(@sixths-margin-large * .5, 4);
-            }
-            &:nth-child(6n+3),
-            &:nth-child(6n+4) {
-                padding-left: round(@sixths-margin-large * .5, 4); 
-                padding-right: round(@sixths-margin-large * .5, 4); 
-            }
-            &:nth-child(6n+5) {
-                padding-left: round(@sixths-margin-large * .5, 4); 
-                padding-right: round(@sixths-margin-large * .3334, 4); 
-            }
-            &:nth-child(6n+6) {
-                padding-left: round(@sixths-margin-large * .6667, 4); 
-                padding-right: 0;
-            }
-        }
-    }
-    
-    // custom widths ------------
-    
-    .grid-block {
-        &.grid-span-large { width: 100%;  }
-        &.grid-1of2-large,
-        &.grid-2of4-large,
-        &.grid-3of6-large { width: 50%;  }
-        &.grid-1of3-large,
-        &.grid-2of6-large { width: 33.3334%;  }
-        &.grid-2of3-large,
-        &.grid-4of6-large { width: 66.6667%; }
-        &.grid-1of4-large { width: 25%; }
-        &.grid-3of4-large { width: 75%; }
-        &.grid-1of5-large { width: 20%; }
-        &.grid-2of5-large { width: 40%; }
-        &.grid-3of5-large { width: 60%; }
-        &.grid-4of5-large { width: 80%; }
-        &.grid-1of6-large { width: 16.6667%; }
-        &.grid-5of6-large { width: 83.3334%; }
-    }
-
-}
-
-/* fixed layout --------------------------------------------------------- */
-
-.grid-fixed {
-    
-    // two columns ---------
-    
-    &.grid-halves {
-        >.grid-block {
-            width: 50%;
-        }
-        >:nth-child(odd) { 
-            padding-right: round(@halves-margin * .5, 4);
-        }
-        >:nth-child(even) { 
-            padding-left: round(@halves-margin * .5, 4);
-        }
-        @media screen and (min-width:@medium) {
-            >:nth-child(odd) { 
-                padding-right: round(@halves-margin-medium * .5, 4);
-            }
-            >:nth-child(even) { 
-                padding-left: round(@halves-margin-medium * .5, 4);
-            }
-        }
-        @media screen and (min-width:@large) {
-            >:nth-child(odd) { 
-                padding-right: round(@halves-margin-large * .5, 4);
-            }
-            >:nth-child(even) { 
-                padding-left: round(@halves-margin-large * .5, 4);
-            }
-        }
-    }
-    
-    // three columns ---------
-    
-    &.grid-thirds {
-        >.grid-block { 
-            width: 33.3334%; 
-        }
+    &:not(.grid-collapse) {
         >:nth-child(3n+1) { 
             padding-right: round(@thirds-margin * .6667, 4); 
         }
@@ -311,93 +99,57 @@
         >:nth-child(3n+3) { 
             padding-left: round(@thirds-margin * .6667, 4); 
         }
-        @media screen and (min-width:@medium) {
-            >:nth-child(3n+1) { 
-                padding-right: round(@thirds-margin-medium * .6667, 4); 
-            }
-            >:nth-child(3n+2) { 
-                padding-left: round(@thirds-margin-medium * .3334, 4); 
-                padding-right: round(@thirds-margin-medium * .3334, 4); 
-            }
-            >:nth-child(3n+3) { 
-                padding-left: round(@thirds-margin-medium * .6667, 4); 
-            }
-        }
-        @media screen and (min-width:@large) {
-            >:nth-child(3n+1) { 
-                padding-right: round(@thirds-margin-large * .6667, 4); 
-            }
-            >:nth-child(3n+2) { 
-                padding-left: round(@thirds-margin-large * .3334, 4); 
-                padding-right: round(@thirds-margin-large * .3334, 4); 
-            }
-            >:nth-child(3n+3) { 
-                padding-left: round(@thirds-margin-large * .6667, 4); 
-            }
+        >:not(:nth-last-child(-n+3)),
+        >:nth-child(3n+3):nth-last-child(-3n+3),
+        >:nth-child(3n+2):nth-last-child(-3n+3),
+        >:nth-child(3n+3):nth-last-child(-3n+2) {
+            padding-bottom: @thirds-margin;
         }
     }
-    
-    // four columns ---------
-    
-    &.grid-fourths {
-        >.grid-block { 
-            width: 25%; 
-        }
-        >:nth-child(4n+1) { 
+}
+
+/* four columns ----------- */
+
+.grid-fourths {
+    >.grid-block {
+        width: 25%;
+    }
+    &:not(.grid-collapse) {
+        >:nth-child(4n+1) {
             padding-right: round(@fourths-margin * .6667, 4); 
         }
-        >:nth-child(4n+2) { 
+        >:nth-child(4n+2) {
             padding-left: round(@fourths-margin * .3334, 4); 
-            padding-right: round(@fourths-margin * .5, 4); 
+            padding-right: round(@fourths-margin * .5, 4);
         }
-        >:nth-child(4n+3) { 
+        >:nth-child(4n+3) {
             padding-left: round(@fourths-margin * .5, 4); 
             padding-right: round(@fourths-margin * .3334, 4); 
         }
-        >:nth-child(4n+4) { 
+        >:nth-child(4n+4) {
             padding-left: round(@fourths-margin * .6667, 4); 
         }
-        @media screen and (min-width:@medium) {
-            >:nth-child(4n+1) { 
-                padding-right: round(@fourths-margin-medium * .6667, 4); 
-            }
-            >:nth-child(4n+2) { 
-                padding-left: round(@fourths-margin-medium * .3334, 4); 
-                padding-right: round(@fourths-margin-medium * .5, 4); 
-            }
-            >:nth-child(4n+3) { 
-                padding-left: round(@fourths-margin-medium * .5, 4); 
-                padding-right: round(@fourths-margin-medium * .3334, 4); 
-            }
-            >:nth-child(4n+4) { 
-                padding-left: round(@fourths-margin-medium * .6667, 4); 
-            }
-        }
-        @media screen and (min-width:@large) {
-            >:nth-child(4n+1) { 
-                padding-right: round(@fourths-margin-large * .6667, 4); 
-            }
-            >:nth-child(4n+2) { 
-                padding-left: round(@fourths-margin-large * .3334, 4); 
-                padding-right: round(@fourths-margin-large * .5, 4); 
-            }
-            >:nth-child(4n+3) { 
-                padding-left: round(@fourths-margin-large * .5, 4); 
-                padding-right: round(@fourths-margin-large * .3334, 4); 
-            }
-            >:nth-child(4n+4) { 
-                padding-left: round(@fourths-margin-large * .6667, 4); 
-            }
+        >:not(:nth-last-child(-n+4)),
+        >:nth-child(4n+4):nth-last-child(-4n+4),
+        >:nth-child(4n+3):nth-last-child(-4n+4),
+        >:nth-child(4n+4):nth-last-child(-4n+3),
+        >:nth-child(4n+2):nth-last-child(-4n+4),
+        >:nth-child(4n+3):nth-last-child(-4n+3),
+        >:nth-child(4n+4):nth-last-child(-4n+2) {
+            padding-bottom: @fourths-margin;
         }
     }
-    
-    // five columns ---------
-    
-    &.grid-fifths {
-        >.grid-block {
-            width: 20%;
-        }
+}
+
+/* five columns ----------- */
+
+.grid-fifths {
+    >.grid-block {
+        width: 20%;
+    }
+    &:not(.grid-collapse) {
         >:nth-child(5n+1) {
+            padding-left: 0;
             padding-right: round(@fifths-margin * .6667, 4); 
         }
         >:nth-child(5n+2) {
@@ -414,9 +166,170 @@
         }
         >:nth-child(5n+5) {
             padding-left: round(@fifths-margin * .6667, 4); 
+            padding-right: 0;
         }
-        @media screen and (min-width:@medium) {
+        >:not(:nth-last-child(-n+5)),
+        >:nth-child(5n+5):nth-last-child(-5n+5),
+        >:nth-child(5n+4):nth-last-child(-5n+5),
+        >:nth-child(5n+5):nth-last-child(-5n+4),
+        >:nth-child(5n+3):nth-last-child(-5n+5),
+        >:nth-child(5n+4):nth-last-child(-5n+4),
+        >:nth-child(5n+5):nth-last-child(-5n+3),
+        >:nth-child(5n+2):nth-last-child(-5n+5),
+        >:nth-child(5n+3):nth-last-child(-5n+4),
+        >:nth-child(5n+4):nth-last-child(-5n+3),
+        >:nth-child(5n+5):nth-last-child(-5n+2) {
+            padding-bottom: @fifths-margin;
+        }
+    }
+}
+
+/* six columns ----------- */
+
+.grid-sixths {
+    >.grid-block {
+        width: 16.6667%;
+    }
+    &:not(.grid-collapse) {
+        >:nth-child(6n+1) {
+            padding-left: 0;
+            padding-right: round(@sixths-margin * .6667, 4); 
+        }
+        >:nth-child(6n+2) {
+            padding-left: round(@sixths-margin * .3334, 4); 
+            padding-right: round(@sixths-margin * .5, 4);
+        }
+        >:nth-child(6n+3),
+        >:nth-child(6n+4) {
+            padding-left: round(@sixths-margin * .5, 4); 
+            padding-right: round(@sixths-margin * .5, 4); 
+        }
+        >:nth-child(6n+5) {
+            padding-left: round(@sixths-margin * .5, 4); 
+            padding-right: round(@sixths-margin * .3334, 4); 
+        }
+        >:nth-child(6n+6) {
+            padding-left: round(@sixths-margin * .6667, 4); 
+            padding-right: 0;
+        }
+        >:not(:nth-last-child(-n+6)),
+        >:nth-child(6n+6):nth-last-child(-6n+6),
+        >:nth-child(6n+5):nth-last-child(-6n+6),
+        >:nth-child(6n+6):nth-last-child(-6n+5),
+        >:nth-child(6n+4):nth-last-child(-6n+6),
+        >:nth-child(6n+5):nth-last-child(-6n+5),
+        >:nth-child(6n+6):nth-last-child(-6n+4),
+        >:nth-child(6n+3):nth-last-child(-6n+6),
+        >:nth-child(6n+4):nth-last-child(-6n+5),
+        >:nth-child(6n+5):nth-last-child(-6n+4),
+        >:nth-child(6n+6):nth-last-child(-6n+3),
+        >:nth-child(6n+2):nth-last-child(-6n+6),
+        >:nth-child(6n+3):nth-last-child(-6n+5),
+        >:nth-child(6n+4):nth-last-child(-6n+4),
+        >:nth-child(6n+5):nth-last-child(-6n+3),
+        >:nth-child(6n+6):nth-last-child(-6n+2) {
+            padding-bottom: @sixths-margin;
+        }
+    }
+}
+
+/* custom widths ------------- */
+
+.grid-block {
+    &.grid-1 { width: 100%; }
+    &.grid-1-2 { width: 50%; }
+    &.grid-1-3 { width: 33.3334%; }
+    &.grid-2-3 { width: 66.6667%; }
+    &.grid-1-4 { width: 25%; }
+    &.grid-3-4 { width: 75%; }
+    &.grid-1-5 { width: 20%; }
+    &.grid-2-5 { width: 40%; }
+    &.grid-3-5 { width: 60%; }
+    &.grid-4-5 { width: 80%; }
+    &.grid-1-6 { width: 16.6667%; }
+    &.grid-5-6 { width: 83.3334%; }
+}
+
+/* styles for medium+ screens -------------------------------------------- */
+
+@media screen and (min-width:@medium) {
+    
+    /* margins for default classes ----------------- */
+
+    .grid-halves  {
+        &:not(.grid-collapse) {
+            >:nth-child(odd) {
+                padding-left: 0;
+                padding-right: round(@halves-margin-medium * .5, 4); 
+            }
+            >:nth-child(even) {
+                padding-left: round(@halves-margin-medium * .5, 4); 
+                padding-right: 0;
+            }
+            >:not(:nth-last-child(-n+2)),
+            >:nth-child(2n+2):nth-last-child(-2n+2) {
+                padding-bottom: @halves-margin-medium;
+            }
+        }
+    }
+
+    .grid-thirds {
+        &:not(.grid-collapse) {
+            >:nth-child(3n+1) { 
+                padding-left: 0;
+                padding-right: round(@thirds-margin-medium * .6667, 4); 
+            }
+            >:nth-child(3n+2) { 
+                padding-left: round(@thirds-margin-medium * .3334, 4); 
+                padding-right: round(@thirds-margin-medium * .3334, 4); 
+            }
+            >:nth-child(3n+3) { 
+                padding-left: round(@thirds-margin-medium * .6667, 4);
+                padding-right: 0; 
+            }
+            >:not(:nth-last-child(-n+3)),
+            >:nth-child(3n+3):nth-last-child(-3n+3),
+            >:nth-child(3n+2):nth-last-child(-3n+3),
+            >:nth-child(3n+3):nth-last-child(-3n+2) {
+                padding-bottom: @thirds-margin-medium;
+            }
+        }
+    }
+
+    .grid-fourths {
+        &:not(.grid-collapse) {
+            >:nth-child(4n+1) {
+                padding-left: 0;
+                padding-right: round(@fourths-margin-medium * .6667, 4); 
+            }
+            >:nth-child(4n+2) {
+                padding-left: round(@fourths-margin-medium * .3334, 4); 
+                padding-right: round(@fourths-margin-medium * .5, 4);
+            }
+            >:nth-child(4n+3) {
+                padding-left: round(@fourths-margin-medium * .5, 4); 
+                padding-right: round(@fourths-margin-medium * .3334, 4); 
+            }
+            >:nth-child(4n+4) {
+                padding-left: round(@fourths-margin-medium * .6667, 4); 
+                padding-right: 0;
+            }
+            >:not(:nth-last-child(-n+4)),
+            >:nth-child(4n+4):nth-last-child(-4n+4),
+            >:nth-child(4n+3):nth-last-child(-4n+4),
+            >:nth-child(4n+4):nth-last-child(-4n+3),
+            >:nth-child(4n+2):nth-last-child(-4n+4),
+            >:nth-child(4n+3):nth-last-child(-4n+3),
+            >:nth-child(4n+4):nth-last-child(-4n+2) {
+                padding-bottom: @fourths-margin-medium;
+            }
+        }
+    }
+
+    .grid-fifths {
+        >:not(.grid-collapse) {
             >:nth-child(5n+1) {
+                padding-left: 0;
                 padding-right: round(@fifths-margin-medium * .6667, 4); 
             }
             >:nth-child(5n+2) {
@@ -433,10 +346,349 @@
             }
             >:nth-child(5n+5) {
                 padding-left: round(@fifths-margin-medium * .6667, 4); 
+                padding-right: 0;
+            }
+            >:nth-child(5n+5):nth-last-child(-5n+5),
+            >:nth-child(5n+4):nth-last-child(-5n+5),
+            >:nth-child(5n+5):nth-last-child(-5n+4),
+            >:nth-child(5n+3):nth-last-child(-5n+5),
+            >:nth-child(5n+4):nth-last-child(-5n+4),
+            >:nth-child(5n+5):nth-last-child(-5n+3),
+            >:nth-child(5n+2):nth-last-child(-5n+5),
+            >:nth-child(5n+3):nth-last-child(-5n+4),
+            >:nth-child(5n+4):nth-last-child(-5n+3),
+            >:nth-child(5n+5):nth-last-child(-5n+2) {
+                padding-bottom: @fifths-margin-medium;
             }
         }
-        @media screen and (min-width:@large) {
+    }
+
+    .grid-sixths {
+        &:not(.grid-collapse) {
+            >:nth-child(6n+1) {
+                padding-left: 0;
+                padding-right: round(@sixths-margin-medium * .6667, 4); 
+            }
+            >:nth-child(6n+2) {
+                padding-left: round(@sixths-margin-medium * .3334, 4); 
+                padding-right: round(@sixths-margin-medium * .5, 4);
+            }
+            >:nth-child(6n+3),
+            >:nth-child(6n+4) {
+                padding-left: round(@sixths-margin-medium * .5, 4); 
+                padding-right: round(@sixths-margin-medium * .5, 4); 
+            }
+            >:nth-child(6n+5) {
+                padding-left: round(@sixths-margin-medium * .5, 4); 
+                padding-right: round(@sixths-margin-medium * .3334, 4); 
+            }
+            >:nth-child(6n+6) {
+                padding-left: round(@sixths-margin-medium * .6667, 4); 
+                padding-right: 0;
+            }
+            >:not(:nth-last-child(-n+6)),
+            >:nth-child(6n+6):nth-last-child(-6n+6),
+            >:nth-child(6n+5):nth-last-child(-6n+6),
+            >:nth-child(6n+6):nth-last-child(-6n+5),
+            >:nth-child(6n+4):nth-last-child(-6n+6),
+            >:nth-child(6n+5):nth-last-child(-6n+5),
+            >:nth-child(6n+6):nth-last-child(-6n+4),
+            >:nth-child(6n+3):nth-last-child(-6n+6),
+            >:nth-child(6n+4):nth-last-child(-6n+5),
+            >:nth-child(6n+5):nth-last-child(-6n+4),
+            >:nth-child(6n+6):nth-last-child(-6n+3),
+            >:nth-child(6n+2):nth-last-child(-6n+6),
+            >:nth-child(6n+3):nth-last-child(-6n+5),
+            >:nth-child(6n+4):nth-last-child(-6n+4),
+            >:nth-child(6n+5):nth-last-child(-6n+3),
+            >:nth-child(6n+6):nth-last-child(-6n+2) {
+                padding-bottom: @sixths-margin-medium;
+            }
+        }
+    }
+
+    /* styles for medium-only classes ----------------- */
+
+    .grid-medium  {
+        >.grid-block {
+            width: 100%;
+        }
+        &:not(.grid-collapse) {
+            >.grid-block {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            >:not(:last-child) {
+                padding-bottom: @halves-margin-medium; 
+            }
+        }
+    }
+
+    .grid-halves-medium  {
+        >.grid-block {
+            width: 50%;
+        }
+        &:not(.grid-collapse) {
+            >:nth-child(odd) {
+                padding-left: 0;
+                padding-right: round(@halves-margin-medium * .5, 4); 
+            }
+            >:nth-child(even) {
+                padding-left: round(@halves-margin-medium * .5, 4); 
+                padding-right: 0;
+            }
+            >:not(:nth-last-child(-n+2)),
+            >:nth-child(2n+2):nth-last-child(-2n+2) {
+                padding-bottom: @halves-margin-medium;
+            }
+        }
+    }
+
+    .grid-thirds-medium {
+        >.grid-block {
+            width: 33.3334%;
+        }
+        &:not(.grid-collapse) {
+            >:nth-child(3n+1) { 
+                padding-left: 0;
+                padding-right: round(@thirds-margin-medium * .6667, 4); 
+            }
+            >:nth-child(3n+2) { 
+                padding-left: round(@thirds-margin-medium * .3334, 4); 
+                padding-right: round(@thirds-margin-medium * .3334, 4); 
+            }
+            >:nth-child(3n+3) { 
+                padding-left: round(@thirds-margin-medium * .6667, 4);
+                padding-right: 0; 
+            }
+            >:not(:nth-last-child(-n+3)),
+            >:nth-child(3n+3):nth-last-child(-3n+3),
+            >:nth-child(3n+2):nth-last-child(-3n+3),
+            >:nth-child(3n+3):nth-last-child(-3n+2) {
+                padding-bottom: @thirds-margin-medium;
+            }
+        }
+    }
+
+    .grid-fourths-medium {
+        >.grid-block {
+            width: 25%;
+        }
+        &:not(.grid-collapse) {
+            >:nth-child(4n+1) {
+                padding-left: 0;
+                padding-right: round(@fourths-margin-medium * .6667, 4); 
+            }
+            >:nth-child(4n+2) {
+                padding-left: round(@fourths-margin-medium * .3334, 4); 
+                padding-right: round(@fourths-margin-medium * .5, 4);
+            }
+            >:nth-child(4n+3) {
+                padding-left: round(@fourths-margin-medium * .5, 4); 
+                padding-right: round(@fourths-margin-medium * .3334, 4); 
+            }
+            >:nth-child(4n+4) {
+                padding-left: round(@fourths-margin-medium * .6667, 4); 
+                padding-right: 0;
+            }
+            >:not(:nth-last-child(-n+4)),
+            >:nth-child(4n+4):nth-last-child(-4n+4),
+            >:nth-child(4n+3):nth-last-child(-4n+4),
+            >:nth-child(4n+4):nth-last-child(-4n+3),
+            >:nth-child(4n+2):nth-last-child(-4n+4),
+            >:nth-child(4n+3):nth-last-child(-4n+3),
+            >:nth-child(4n+4):nth-last-child(-4n+2) {
+                padding-bottom: @fourths-margin-medium;
+            }
+        }
+    }
+
+    .grid-fifths-medium {
+        >.grid-block {
+            width: 20%;
+        }
+        &:not(.grid-collapse) {
             >:nth-child(5n+1) {
+                padding-left: 0;
+                padding-right: round(@fifths-margin-medium * .6667, 4); 
+            }
+            >:nth-child(5n+2) {
+                padding-left: round(@fifths-margin-medium * .3334, 4); 
+                padding-right: round(@fifths-margin-medium * .5, 4);
+            }
+            >:nth-child(5n+3) {
+                padding-left: round(@fifths-margin-medium * .5, 4); 
+                padding-right: round(@fifths-margin-medium * .5, 4); 
+            }
+            >:nth-child(5n+4) {
+                padding-left: round(@fifths-margin-medium * .5, 4); 
+                padding-right: round(@fifths-margin-medium * .3334, 4); 
+            }
+            >:nth-child(5n+5) {
+                padding-left: round(@fifths-margin-medium * .6667, 4); 
+                padding-right: 0;
+            }
+            >:nth-child(5n+5):nth-last-child(-5n+5),
+            >:nth-child(5n+4):nth-last-child(-5n+5),
+            >:nth-child(5n+5):nth-last-child(-5n+4),
+            >:nth-child(5n+3):nth-last-child(-5n+5),
+            >:nth-child(5n+4):nth-last-child(-5n+4),
+            >:nth-child(5n+5):nth-last-child(-5n+3),
+            >:nth-child(5n+2):nth-last-child(-5n+5),
+            >:nth-child(5n+3):nth-last-child(-5n+4),
+            >:nth-child(5n+4):nth-last-child(-5n+3),
+            >:nth-child(5n+5):nth-last-child(-5n+2) {
+                padding-bottom: @fifths-margin-medium;
+            }
+        }
+    }
+
+    .grid-sixths-medium {
+        >.grid-block {
+            width: 16.6667%;
+        }
+        &:not(.grid-collapse) {
+            >:nth-child(6n+1) {
+                padding-left: 0;
+                padding-right: round(@sixths-margin-medium * .6667, 4); 
+            }
+            >:nth-child(6n+2) {
+                padding-left: round(@sixths-margin-medium * .3334, 4); 
+                padding-right: round(@sixths-margin-medium * .5, 4);
+            }
+            >:nth-child(6n+3),
+            >:nth-child(6n+4) {
+                padding-left: round(@sixths-margin-medium * .5, 4); 
+                padding-right: round(@sixths-margin-medium * .5, 4); 
+            }
+            >:nth-child(6n+5) {
+                padding-left: round(@sixths-margin-medium * .5, 4); 
+                padding-right: round(@sixths-margin-medium * .3334, 4); 
+            }
+            >:nth-child(6n+6) {
+                padding-left: round(@sixths-margin-medium * .6667, 4); 
+                padding-right: 0;
+            }
+            >:not(:nth-last-child(-n+6)),
+            >:nth-child(6n+6):nth-last-child(-6n+6),
+            >:nth-child(6n+5):nth-last-child(-6n+6),
+            >:nth-child(6n+6):nth-last-child(-6n+5),
+            >:nth-child(6n+4):nth-last-child(-6n+6),
+            >:nth-child(6n+5):nth-last-child(-6n+5),
+            >:nth-child(6n+6):nth-last-child(-6n+4),
+            >:nth-child(6n+3):nth-last-child(-6n+6),
+            >:nth-child(6n+4):nth-last-child(-6n+5),
+            >:nth-child(6n+5):nth-last-child(-6n+4),
+            >:nth-child(6n+6):nth-last-child(-6n+3),
+            >:nth-child(6n+2):nth-last-child(-6n+6),
+            >:nth-child(6n+3):nth-last-child(-6n+5),
+            >:nth-child(6n+4):nth-last-child(-6n+4),
+            >:nth-child(6n+5):nth-last-child(-6n+3),
+            >:nth-child(6n+6):nth-last-child(-6n+2) {
+                padding-bottom: @sixths-margin-medium;
+            }
+        }
+    }
+
+    /* custom widths ------------- */
+
+    .grid-block {
+        &.grid-1-medium { width: 100%; }
+        &.grid-1-2-medium { width: 50%; }
+        &.grid-1-3-medium { width: 33.3334%; }
+        &.grid-2-3-medium { width: 66.6667%; }
+        &.grid-1-4-medium { width: 25%; }
+        &.grid-3-4-medium { width: 75%; }
+        &.grid-1-5-medium { width: 20%; }
+        &.grid-2-5-medium { width: 40%; }
+        &.grid-3-5-medium { width: 60%; }
+        &.grid-4-5-medium { width: 80%; }
+        &.grid-1-6-medium { width: 16.6667%; }
+        &.grid-5-6-medium { width: 83.3334%; }
+    }
+
+}
+
+/* styles for large screens -------------------------------------------- */
+
+@media screen and (min-width:@large) {
+    
+    /* margins for default classes ----------------- */
+
+    .grid-halves  {
+        &:not(.grid-collapse) {
+            >:nth-child(odd) {
+                padding-left: 0;
+                padding-right: round(@halves-margin-large * .5, 4); 
+            }
+            >:nth-child(even) {
+                padding-left: round(@halves-margin-large * .5, 4); 
+                padding-right: 0;
+            }
+            >:not(:nth-last-child(-n+2)),
+            >:nth-child(2n+2):nth-last-child(-2n+2) {
+                padding-bottom: @halves-margin-large;
+            }
+        }
+    }
+
+    .grid-thirds {
+        &:not(.grid-collapse) {
+            >:nth-child(3n+1) { 
+                padding-left: 0;
+                padding-right: round(@thirds-margin-large * .6667, 4); 
+            }
+            >:nth-child(3n+2) { 
+                padding-left: round(@thirds-margin-large * .3334, 4); 
+                padding-right: round(@thirds-margin-large * .3334, 4); 
+            }
+            >:nth-child(3n+3) { 
+                padding-left: round(@thirds-margin-large * .6667, 4);
+                padding-right: 0; 
+            }
+            >:not(:nth-last-child(-n+3)),
+            >:nth-child(3n+3):nth-last-child(-3n+3),
+            >:nth-child(3n+2):nth-last-child(-3n+3),
+            >:nth-child(3n+3):nth-last-child(-3n+2) {
+                padding-bottom: @thirds-margin-large;
+            }
+        }
+    }
+
+    .grid-fourths {
+        &:not(.grid-collapse) {
+            >:nth-child(4n+1) {
+                padding-left: 0;
+                padding-right: round(@fourths-margin-large * .6667, 4); 
+            }
+            >:nth-child(4n+2) {
+                padding-left: round(@fourths-margin-large * .3334, 4); 
+                padding-right: round(@fourths-margin-large * .5, 4);
+            }
+            >:nth-child(4n+3) {
+                padding-left: round(@fourths-margin-large * .5, 4); 
+                padding-right: round(@fourths-margin-large * .3334, 4); 
+            }
+            >:nth-child(4n+4) {
+                padding-left: round(@fourths-margin-large * .6667, 4); 
+                padding-right: 0;
+            }
+            >:not(:nth-last-child(-n+4)),
+            >:nth-child(4n+4):nth-last-child(-4n+4),
+            >:nth-child(4n+3):nth-last-child(-4n+4),
+            >:nth-child(4n+4):nth-last-child(-4n+3),
+            >:nth-child(4n+2):nth-last-child(-4n+4),
+            >:nth-child(4n+3):nth-last-child(-4n+3),
+            >:nth-child(4n+4):nth-last-child(-4n+2) {
+                padding-bottom: @fourths-margin-large;
+            }
+        }
+    }
+
+    .grid-fifths {
+        >:not(.grid-collapse) {
+            >:nth-child(5n+1) {
+                padding-left: 0;
                 padding-right: round(@fifths-margin-large * .6667, 4); 
             }
             >:nth-child(5n+2) {
@@ -453,58 +705,27 @@
             }
             >:nth-child(5n+5) {
                 padding-left: round(@fifths-margin-large * .6667, 4); 
+                padding-right: 0;
+            }
+            >:nth-child(5n+5):nth-last-child(-5n+5),
+            >:nth-child(5n+4):nth-last-child(-5n+5),
+            >:nth-child(5n+5):nth-last-child(-5n+4),
+            >:nth-child(5n+3):nth-last-child(-5n+5),
+            >:nth-child(5n+4):nth-last-child(-5n+4),
+            >:nth-child(5n+5):nth-last-child(-5n+3),
+            >:nth-child(5n+2):nth-last-child(-5n+5),
+            >:nth-child(5n+3):nth-last-child(-5n+4),
+            >:nth-child(5n+4):nth-last-child(-5n+3),
+            >:nth-child(5n+5):nth-last-child(-5n+2) {
+                padding-bottom: @fifths-margin-large;
             }
         }
     }
-    
-    // five columns ---------
-    
-    &.grid-sixths {
-        >.grid-block {
-            width: 16.6667%;
-        }
-        >:nth-child(6n+1) {
-            padding-right: round(@sixths-margin * .6667, 4); 
-        }
-        >:nth-child(6n+2) {
-            padding-left: round(@sixths-margin * .3334, 4); 
-            padding-right: round(@sixths-margin * .5, 4);
-        }
-        >:nth-child(6n+3),
-        >:nth-child(6n+4){
-            padding-left: round(@sixths-margin * .5, 4); 
-            padding-right: round(@sixths-margin * .5, 4); 
-        }
-        >:nth-child(6n+5) {
-            padding-left: round(@sixths-margin * .5, 4); 
-            padding-right: round(@sixths-margin * .3334, 4); 
-        }
-        >:nth-child(6n+6) {
-            padding-left: round(@sixths-margin * .6667, 4); 
-        }
-        @media screen and (min-width:@medium) {
+
+    .grid-sixths {
+        &:not(.grid-collapse) {
             >:nth-child(6n+1) {
-                padding-right: round(@sixths-margin-medium * .6667, 4); 
-            }
-            >:nth-child(6n+2) {
-                padding-left: round(@sixths-margin-medium * .3334, 4); 
-                padding-right: round(@sixths-margin-medium * .5, 4);
-            }
-            >:nth-child(6n+3),
-            >:nth-child(6n+4){
-                padding-left: round(@sixths-margin-medium * .5, 4); 
-                padding-right: round(@sixths-margin-medium * .5, 4); 
-            }
-            >:nth-child(6n+5) {
-                padding-left: round(@sixths-margin-medium * .5, 4); 
-                padding-right: round(@sixths-margin-medium * .3334, 4); 
-            }
-            >:nth-child(6n+6) {
-                padding-left: round(@sixths-margin-medium * .6667, 4); 
-            }
-        }
-        @media screen and (min-width:@large) {
-            >:nth-child(6n+1) {
+                padding-left: 0;
                 padding-right: round(@sixths-margin-large * .6667, 4); 
             }
             >:nth-child(6n+2) {
@@ -512,7 +733,7 @@
                 padding-right: round(@sixths-margin-large * .5, 4);
             }
             >:nth-child(6n+3),
-            >:nth-child(6n+4){
+            >:nth-child(6n+4) {
                 padding-left: round(@sixths-margin-large * .5, 4); 
                 padding-right: round(@sixths-margin-large * .5, 4); 
             }
@@ -522,174 +743,231 @@
             }
             >:nth-child(6n+6) {
                 padding-left: round(@sixths-margin-large * .6667, 4); 
+                padding-right: 0;
+            }
+            >:not(:nth-last-child(-n+6)),
+            >:nth-child(6n+6):nth-last-child(-6n+6),
+            >:nth-child(6n+5):nth-last-child(-6n+6),
+            >:nth-child(6n+6):nth-last-child(-6n+5),
+            >:nth-child(6n+4):nth-last-child(-6n+6),
+            >:nth-child(6n+5):nth-last-child(-6n+5),
+            >:nth-child(6n+6):nth-last-child(-6n+4),
+            >:nth-child(6n+3):nth-last-child(-6n+6),
+            >:nth-child(6n+4):nth-last-child(-6n+5),
+            >:nth-child(6n+5):nth-last-child(-6n+4),
+            >:nth-child(6n+6):nth-last-child(-6n+3),
+            >:nth-child(6n+2):nth-last-child(-6n+6),
+            >:nth-child(6n+3):nth-last-child(-6n+5),
+            >:nth-child(6n+4):nth-last-child(-6n+4),
+            >:nth-child(6n+5):nth-last-child(-6n+3),
+            >:nth-child(6n+6):nth-last-child(-6n+2) {
+                padding-bottom: @sixths-margin-large;
             }
         }
     }
-    
-    // custom widths -------------
-    
+
+    /* styles for large-only classes ----------------- */
+
+    .grid-large  {
+        >.grid-block {
+            width: 100%;
+        }
+        &:not(.grid-collapse) {
+            >.grid-block {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            >:not(:last-child) {
+                padding-bottom: @halves-margin-large; 
+            }
+        }
+    }
+
+    .grid-halves-large  {
+        >.grid-block {
+            width: 50%;
+        }
+        &:not(.grid-collapse) {
+            >:nth-child(odd) {
+                padding-left: 0;
+                padding-right: round(@halves-margin-large * .5, 4); 
+            }
+            >:nth-child(even) {
+                padding-left: round(@halves-margin-large * .5, 4); 
+                padding-right: 0;
+            }
+            >:not(:nth-last-child(-n+2)),
+            >:nth-child(2n+2):nth-last-child(-2n+2) {
+                padding-bottom: @halves-margin-large;
+            }
+        }
+    }
+
+    .grid-thirds-large {
+        >.grid-block {
+            width: 33.3334%;
+        }
+        &:not(.grid-collapse) {
+            >:nth-child(3n+1) { 
+                padding-left: 0;
+                padding-right: round(@thirds-margin-large * .6667, 4); 
+            }
+            >:nth-child(3n+2) { 
+                padding-left: round(@thirds-margin-large * .3334, 4); 
+                padding-right: round(@thirds-margin-large * .3334, 4); 
+            }
+            >:nth-child(3n+3) { 
+                padding-left: round(@thirds-margin-large * .6667, 4);
+                padding-right: 0; 
+            }
+            >:not(:nth-last-child(-n+3)),
+            >:nth-child(3n+3):nth-last-child(-3n+3),
+            >:nth-child(3n+2):nth-last-child(-3n+3),
+            >:nth-child(3n+3):nth-last-child(-3n+2) {
+                padding-bottom: @thirds-margin-large;
+            }
+        }
+    }
+
+    .grid-fourths-large {
+        >.grid-block {
+            width: 25%;
+        }
+        &:not(.grid-collapse) {
+            >:nth-child(4n+1) {
+                padding-left: 0;
+                padding-right: round(@fourths-margin-large * .6667, 4); 
+            }
+            >:nth-child(4n+2) {
+                padding-left: round(@fourths-margin-large * .3334, 4); 
+                padding-right: round(@fourths-margin-large * .5, 4);
+            }
+            >:nth-child(4n+3) {
+                padding-left: round(@fourths-margin-large * .5, 4); 
+                padding-right: round(@fourths-margin-large * .3334, 4); 
+            }
+            >:nth-child(4n+4) {
+                padding-left: round(@fourths-margin-large * .6667, 4); 
+                padding-right: 0;
+            }
+            >:not(:nth-last-child(-n+4)),
+            >:nth-child(4n+4):nth-last-child(-4n+4),
+            >:nth-child(4n+3):nth-last-child(-4n+4),
+            >:nth-child(4n+4):nth-last-child(-4n+3),
+            >:nth-child(4n+2):nth-last-child(-4n+4),
+            >:nth-child(4n+3):nth-last-child(-4n+3),
+            >:nth-child(4n+4):nth-last-child(-4n+2) {
+                padding-bottom: @fourths-margin-large;
+            }
+        }
+    }
+
+    .grid-fifths-large {
+        >.grid-block {
+            width: 20%;
+        }
+        &:not(.grid-collapse) {
+            >.grid-block {
+                &:nth-child(5n+1) {
+                    padding-left: 0;
+                    padding-right: round(@fifths-margin-large * .6667, 4); 
+                }
+                &:nth-child(5n+2) {
+                    padding-left: round(@fifths-margin-large * .3334, 4); 
+                    padding-right: round(@fifths-margin-large * .5, 4);
+                }
+                &:nth-child(5n+3) {
+                    padding-left: round(@fifths-margin-large * .5, 4); 
+                    padding-right: round(@fifths-margin-large * .5, 4); 
+                }
+                &:nth-child(5n+4) {
+                    padding-left: round(@fifths-margin-large * .5, 4); 
+                    padding-right: round(@fifths-margin-large * .3334, 4); 
+                }
+                &:nth-child(5n+5) {
+                    padding-left: round(@fifths-margin-large * .6667, 4); 
+                    padding-right: 0;
+                }
+                >:nth-child(5n+5):nth-last-child(-5n+5),
+                >:nth-child(5n+4):nth-last-child(-5n+5),
+                >:nth-child(5n+5):nth-last-child(-5n+4),
+                >:nth-child(5n+3):nth-last-child(-5n+5),
+                >:nth-child(5n+4):nth-last-child(-5n+4),
+                >:nth-child(5n+5):nth-last-child(-5n+3),
+                >:nth-child(5n+2):nth-last-child(-5n+5),
+                >:nth-child(5n+3):nth-last-child(-5n+4),
+                >:nth-child(5n+4):nth-last-child(-5n+3),
+                >:nth-child(5n+5):nth-last-child(-5n+2) {
+                    padding-bottom: @fifths-margin-large;
+                }
+            }
+        }
+    }
+
+    .grid-sixths-large {
+        >.grid-block {
+            width: 16.6667%;
+        }
+        &:not(.grid-collapse) {
+            >.grid-block {
+                &:nth-child(6n+1) {
+                    padding-left: 0;
+                    padding-right: round(@sixths-margin-large * .6667, 4); 
+                }
+                &:nth-child(6n+2) {
+                    padding-left: round(@sixths-margin-large * .3334, 4); 
+                    padding-right: round(@sixths-margin-large * .5, 4);
+                }
+                &:nth-child(6n+3),
+                &:nth-child(6n+4) {
+                    padding-left: round(@sixths-margin-large * .5, 4); 
+                    padding-right: round(@sixths-margin-large * .5, 4); 
+                }
+                &:nth-child(6n+5) {
+                    padding-left: round(@sixths-margin-large * .5, 4); 
+                    padding-right: round(@sixths-margin-large * .3334, 4); 
+                }
+                &:nth-child(6n+6) {
+                    padding-left: round(@sixths-margin-large * .6667, 4); 
+                    padding-right: 0;
+                }
+                >:not(:nth-last-child(-n+6)),
+                >:nth-child(6n+6):nth-last-child(-6n+6),
+                >:nth-child(6n+5):nth-last-child(-6n+6),
+                >:nth-child(6n+6):nth-last-child(-6n+5),
+                >:nth-child(6n+4):nth-last-child(-6n+6),
+                >:nth-child(6n+5):nth-last-child(-6n+5),
+                >:nth-child(6n+6):nth-last-child(-6n+4),
+                >:nth-child(6n+3):nth-last-child(-6n+6),
+                >:nth-child(6n+4):nth-last-child(-6n+5),
+                >:nth-child(6n+5):nth-last-child(-6n+4),
+                >:nth-child(6n+6):nth-last-child(-6n+3),
+                >:nth-child(6n+2):nth-last-child(-6n+6),
+                >:nth-child(6n+3):nth-last-child(-6n+5),
+                >:nth-child(6n+4):nth-last-child(-6n+4),
+                >:nth-child(6n+5):nth-last-child(-6n+3),
+                >:nth-child(6n+6):nth-last-child(-6n+2) {
+                    padding-bottom: @sixths-margin-large;
+                }
+            }
+        }
+    }
+
+    /* custom widths ------------- */
+
     .grid-block {
-        &.grid-span { width: 100%;  }
-        &.grid-1of2,
-        &.grid-2of4,
-        &.grid-3of6 { width: 50%;  }
-        &.grid-1of3,
-        &.grid-2of6 { width: 33.3334%;  }
-        &.grid-2of3,
-        &.grid-4of6 { width: 66.6667%; }
-        &.grid-1of4 { width: 25%; }
-        &.grid-3of4 { width: 75%; }
-        &.grid-1of5 { width: 20%; }
-        &.grid-2of5 { width: 40%; }
-        &.grid-3of5 { width: 60%; }
-        &.grid-4of5 { width: 80%; }
-        &.grid-1of6 { width: 16.6667%; }
-        &.grid-5of6 { width: 83.3334%; }
-    }
-    
-    @media screen and (min-width:@medium) {
-     
-        .grid-block {
-            &.grid-span-medium { width: 100%;  }
-            &.grid-1of2-medium,
-            &.grid-2of4-medium,
-            &.grid-3of6-medium { width: 50%;  }
-            &.grid-1of3-medium,
-            &.grid-2of6-medium { width: 33.3334%;  }
-            &.grid-2of3-medium,
-            &.grid-4of6-medium { width: 66.6667%; }
-            &.grid-1of4-medium { width: 25%; }
-            &.grid-3of4-medium { width: 75%; }
-            &.grid-1of5-medium { width: 20%; }
-            &.grid-2of5-medium { width: 40%; }
-            &.grid-3of5-medium { width: 60%; }
-            &.grid-4of5-medium { width: 80%; }
-            &.grid-1of6-medium { width: 16.6667%; }
-            &.grid-5of6-medium { width: 83.3334%; }
-        }
-        
-    }
-    
-    @media screen and (min-width:@large) {
-     
-        .grid-block {
-            &.grid-span-large { width: 100%;  }
-            &.grid-1of2-large,
-            &.grid-2of4-large,
-            &.grid-3of6-large { width: 50%;  }
-            &.grid-1of3-large,
-            &.grid-2of6-large { width: 33.3334%;  }
-            &.grid-2of3-large,
-            &.grid-4of6-large { width: 66.6667%; }
-            &.grid-1of4-large { width: 25%; }
-            &.grid-3of4-large { width: 75%; }
-            &.grid-1of5-large { width: 20%; }
-            &.grid-2of5-large { width: 40%; }
-            &.grid-3of5-large { width: 60%; }
-            &.grid-4of5-large { width: 80%; }
-            &.grid-1of6-large { width: 16.6667%; }
-            &.grid-5of6-large { width: 83.3334%; }
-        }
-        
-    }
-    
-}
-
-/* vertical spacing -------------------------------------------------------- */
-
-.grid-halves,
-.grid-thirds,
-.grid-fourths,
-.grid-fifths,
-.grid-sixths {
-    .grid-block {
-        padding-bottom: @halves-margin;
-    }
-}
-
-.grid-block:last-child,
-.grid-fixed.grid-halves > :nth-child(odd):nth-last-child(-n+2),
-.grid-fixed.grid-thirds > :nth-child(3n+1):nth-last-child(-n+3),
-.grid-fixed.grid-thirds > :nth-child(3n+2):nth-last-child(-n+2),
-.grid-fixed.grid-fourths > :nth-child(4n+1):nth-last-child(-n+4),
-.grid-fixed.grid-fourths > :nth-child(4n+2):nth-last-child(-n+3),
-.grid-fixed.grid-fourths > :nth-child(4n+3):nth-last-child(-n+2),
-.grid-fixed.grid-fifths > :nth-child(5n+1):nth-last-child(-n+5),
-.grid-fixed.grid-fifths > :nth-child(5n+2):nth-last-child(-n+4),
-.grid-fixed.grid-fifths > :nth-child(5n+3):nth-last-child(-n+3),
-.grid-fixed.grid-fifths > :nth-child(5n+4):nth-last-child(-n+2),
-.grid-fixed.grid-sixths > :nth-child(6n+1):nth-last-child(-n+6),
-.grid-fixed.grid-sixths > :nth-child(6n+2):nth-last-child(-n+5),
-.grid-fixed.grid-sixths > :nth-child(6n+3):nth-last-child(-n+4),
-.grid-fixed.grid-sixths > :nth-child(6n+4):nth-last-child(-n+3),
-.grid-fixed.grid-sixths > :nth-child(6n+5):nth-last-child(-n+4) {
-    padding-bottom: 0;
-}
-
-@media screen and (min-width:@medium) {
-
-    .grid-halves,
-    .grid-fourths { 
-        .grid-block {
-            padding-bottom: @halves-margin-medium;
-        }
-    }
-    
-    .grid-thirds,
-    .grid-fifths,
-    .grid-sixths { 
-        .grid-block { 
-            padding-bottom: @thirds-margin-medium; 
-        }
-    }
-    
-    .grid-block:last-child,
-    .grid-halves > :nth-child(odd):nth-last-child(-n+2),
-    .grid-thirds > :nth-child(3n+1):nth-last-child(-n+3),
-    .grid-thirds > :nth-child(3n+2):nth-last-child(-n+2),
-    .grid-fourths > :nth-child(odd):nth-last-child(-n+2),
-    .grid-fifths > :nth-child(3n+1):nth-last-child(-n+3),
-    .grid-fifths > :nth-child(3n+2):nth-last-child(-n+2) {
-        padding-bottom: 0;
+        &.grid-1-large { width: 100%; }
+        &.grid-1-2-large { width: 50%; }
+        &.grid-1-3-large { width: 33.3334%; }
+        &.grid-2-3-large { width: 66.6667%; }
+        &.grid-1-4-large { width: 25%; }
+        &.grid-3-4-large { width: 75%; }
+        &.grid-1-5-large { width: 20%; }
+        &.grid-2-5-large { width: 40%; }
+        &.grid-3-5-large { width: 60%; }
+        &.grid-4-5-large { width: 80%; }
+        &.grid-1-6-large { width: 16.6667%; }
+        &.grid-5-6-large { width: 83.3334%; }
     }
 
-}
-
-@media screen and (min-width:@large) {
-
-    .grid-halves .grid-block { padding-bottom: @halves-margin-large; }
-    .grid-thirds .grid-block { padding-bottom: @thirds-margin-large; }
-    .grid-fourths .grid-block { padding-bottom: @fourths-margin-large; }
-    
-    .grid-block:last-child,
-    .grid-fourths > :nth-child(4n+1):nth-last-child(-n+4),
-    .grid-fourths > :nth-child(4n+2):nth-last-child(-n+3),
-    .grid-fourths > :nth-child(4n+3):nth-last-child(-n+2),
-    .grid-fifths > :nth-child(5n+1):nth-last-child(-n+5),
-    .grid-fifths > :nth-child(5n+2):nth-last-child(-n+4),
-    .grid-fifths > :nth-child(5n+3):nth-last-child(-n+3),
-    .grid-fifths > :nth-child(5n+4):nth-last-child(-n+2)
-    .grid-sixths > :nth-child(6n+1):nth-last-child(-n+6),
-    .grid-sixths > :nth-child(6n+2):nth-last-child(-n+5),
-    .grid-sixths > :nth-child(6n+3):nth-last-child(-n+4),
-    .grid-sixths > :nth-child(6n+4):nth-last-child(-n+3),
-    .grid-sixths > :nth-child(6n+5):nth-last-child(-n+4) {
-        padding-bottom: 0;
-    }
-
-}
-
-/* collapse spacing -------------------------------------------------------- */
-
-.grid-collapse {
-    &.grid,
-    &.grid-halves,
-    &.grid-thirds,
-    &.grid-fourths,
-    &.grid-fifths,
-    &.grid-sixths { 
-        .grid-block {
-            padding: 0;
-        }
-    }
 }
