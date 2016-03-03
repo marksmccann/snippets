@@ -1,9 +1,3 @@
-/**
- * css grid
- * @author Mark McCann <www.markmccann.me>
- * @license MIT
- */
-
 // breakpoints
 @medium: 30.625rem; // 490px
 @large: 50rem; // 800px
@@ -49,6 +43,10 @@
     box-sizing: border-box;
     float: left;
     width: 100%;
+}
+
+.grid-padding {
+    padding: @content-padding;
 }
 
 /* single column ----------- */
@@ -235,23 +233,32 @@
 /* custom widths ------------- */
 
 .grid-block {
-    &.grid-1 { width: 100%; }
-    &.grid-1-2 { width: 50%; }
-    &.grid-1-3 { width: 33.3334%; }
-    &.grid-2-3 { width: 66.6667%; }
-    &.grid-1-4 { width: 25%; }
-    &.grid-3-4 { width: 75%; }
-    &.grid-1-5 { width: 20%; }
-    &.grid-2-5 { width: 40%; }
-    &.grid-3-5 { width: 60%; }
-    &.grid-4-5 { width: 80%; }
-    &.grid-1-6 { width: 16.6667%; }
-    &.grid-5-6 { width: 83.3334%; }
+    &.grid-10 { width: 10%; }
+    &.grid-15 { width: 15%; }
+    &.grid-16 { width: 16.6667%; }
+    &.grid-20 { width: 20%; }
+    &.grid-25 { width: 25%; }
+    &.grid-30 { width: 30%; }
+    &.grid-33 { width: 33.3334%; }
+    &.grid-40 { width: 40%; }
+    &.grid-50 { width: 50%; }
+    &.grid-60 { width: 60%; }
+    &.grid-66 { width: 66.6667%; }
+    &.grid-70 { width: 70%; }
+    &.grid-75 { width: 75%; }
+    &.grid-80 { width: 80%; }
+    &.grid-83 { width: 83.3334%; }
+    &.grid-85 { width: 85%; }
+    &.grid-90 { width: 90%; }
 }
 
 /* styles for medium+ screens -------------------------------------------- */
 
-@media screen and (min-width:@medium) {
+@media (min-width:@medium) {
+
+    .grid-padding {
+        padding: @content-padding-medium;
+    }
     
     /* margins for default classes ----------------- */
 
@@ -326,7 +333,7 @@
     }
 
     .grid-fifths {
-        >:not(.grid-collapse) {
+        &:not(.grid-collapse) {
             >:nth-child(5n+1) {
                 padding-left: 0;
                 padding-right: round(@fifths-margin-medium * .6667, 4); 
@@ -592,29 +599,47 @@
     /* custom widths ------------- */
 
     .grid-block {
-        &.grid-1-medium { width: 100%; }
-        &.grid-1-2-medium { width: 50%; }
-        &.grid-1-3-medium { width: 33.3334%; }
-        &.grid-2-3-medium { width: 66.6667%; }
-        &.grid-1-4-medium { width: 25%; }
-        &.grid-3-4-medium { width: 75%; }
-        &.grid-1-5-medium { width: 20%; }
-        &.grid-2-5-medium { width: 40%; }
-        &.grid-3-5-medium { width: 60%; }
-        &.grid-4-5-medium { width: 80%; }
-        &.grid-1-6-medium { width: 16.6667%; }
-        &.grid-5-6-medium { width: 83.3334%; }
+        &.grid-10-medium { width: 10%; }
+        &.grid-15-medium { width: 15%; }
+        &.grid-16-medium { width: 16.6667%; }
+        &.grid-20-medium { width: 20%; }
+        &.grid-25-medium { width: 25%; }
+        &.grid-30-medium { width: 30%; }
+        &.grid-33-medium { width: 33.3334%; }
+        &.grid-40-medium { width: 40%; }
+        &.grid-50-medium { width: 50%; }
+        &.grid-60-medium { width: 60%; }
+        &.grid-66-medium { width: 66.6667%; }
+        &.grid-70-medium { width: 70%; }
+        &.grid-75-medium { width: 75%; }
+        &.grid-80-medium { width: 80%; }
+        &.grid-83-medium { width: 83.3334%; }
+        &.grid-85-medium { width: 85%; }
+        &.grid-90-medium { width: 90%; }
     }
 
 }
 
 /* styles for large screens -------------------------------------------- */
 
-@media screen and (min-width:@large) {
+@media (min-width:@large) {
+
+    .grid-padding {
+        padding: @content-padding-large;
+    }
     
     /* margins for default classes ----------------- */
 
-    .grid-halves  {
+    .grid-medium  {
+        &:not(.grid-collapse) {
+            >:not(:last-child) {
+                padding-bottom: @halves-margin-large; 
+            }
+        }
+    }
+
+    .grid-halves,
+    .grid-halves-medium {
         &:not(.grid-collapse) {
             >:nth-child(odd) {
                 padding-left: 0;
@@ -631,7 +656,8 @@
         }
     }
 
-    .grid-thirds {
+    .grid-thirds,
+    .grid-thirds-medium {
         &:not(.grid-collapse) {
             >:nth-child(3n+1) { 
                 padding-left: 0;
@@ -654,7 +680,8 @@
         }
     }
 
-    .grid-fourths {
+    .grid-fourths,
+    .grid-fourths-medium {
         &:not(.grid-collapse) {
             >:nth-child(4n+1) {
                 padding-left: 0;
@@ -684,8 +711,9 @@
         }
     }
 
-    .grid-fifths {
-        >:not(.grid-collapse) {
+    .grid-fifths,
+    .grid-fifths-medium {
+        &:not(.grid-collapse) {
             >:nth-child(5n+1) {
                 padding-left: 0;
                 padding-right: round(@fifths-margin-large * .6667, 4); 
@@ -721,7 +749,8 @@
         }
     }
 
-    .grid-sixths {
+    .grid-sixths,
+    .grid-sixths-medium {
         &:not(.grid-collapse) {
             >:nth-child(6n+1) {
                 padding-left: 0;
@@ -955,18 +984,23 @@
     /* custom widths ------------- */
 
     .grid-block {
-        &.grid-1-large { width: 100%; }
-        &.grid-1-2-large { width: 50%; }
-        &.grid-1-3-large { width: 33.3334%; }
-        &.grid-2-3-large { width: 66.6667%; }
-        &.grid-1-4-large { width: 25%; }
-        &.grid-3-4-large { width: 75%; }
-        &.grid-1-5-large { width: 20%; }
-        &.grid-2-5-large { width: 40%; }
-        &.grid-3-5-large { width: 60%; }
-        &.grid-4-5-large { width: 80%; }
-        &.grid-1-6-large { width: 16.6667%; }
-        &.grid-5-6-large { width: 83.3334%; }
+        &.grid-10-large { width: 10%; }
+        &.grid-15-large { width: 15%; }
+        &.grid-16-large { width: 16.6667%; }
+        &.grid-20-large { width: 20%; }
+        &.grid-25-large { width: 25%; }
+        &.grid-30-large { width: 30%; }
+        &.grid-33-large { width: 33.3334%; }
+        &.grid-40-large { width: 40%; }
+        &.grid-50-large { width: 50%; }
+        &.grid-60-large { width: 60%; }
+        &.grid-66-large { width: 66.6667%; }
+        &.grid-70-large { width: 70%; }
+        &.grid-75-large { width: 75%; }
+        &.grid-80-large { width: 80%; }
+        &.grid-83-large { width: 83.3334%; }
+        &.grid-85-large { width: 85%; }
+        &.grid-90-large { width: 90%; }
     }
 
 }
